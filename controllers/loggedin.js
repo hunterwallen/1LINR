@@ -9,7 +9,7 @@ const isAuthenticated = (req, res, next) => {
   }
 }
 
-loggedIn.get('/' , isAuthenticated, (req, res) => {
+loggedIn.get('/' , (req, res) => {
   res.send('Hello World!');
 });
 
