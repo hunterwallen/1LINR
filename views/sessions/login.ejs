@@ -1,6 +1,13 @@
 <html lang="en" dir="ltr">
-  <%-include('./partials/head.ejs')%>
+  <%-include('../partials/head.ejs')%>
   <body>
     <h1>Login</h1>
+    <div class="authenticationDiv">
+    <form class="authenticationForm" action="/sessions/" method="POST">
+      <input type="text" name="username" placeholder="username">
+      <input type="password" name="password" placeholder="password">
+      <input type="submit" value="Login" class='submitUser'>
+    </form>
+  </div>
   </body>
 </html>
