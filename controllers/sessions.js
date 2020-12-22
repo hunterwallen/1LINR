@@ -24,7 +24,12 @@ sessions.post('/', (req, res) => {
   })
 })
 
-
+sessions.delete('/', (req, res) => {
+  req.session.destroy(() => {
+    console.log('logged out');
+    res.redirect('/gatekeeper/')
+  })
+})
 
 
 module.exports = sessions

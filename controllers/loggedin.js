@@ -9,7 +9,7 @@ const isAuthenticated = (req, res, next) => {
   }
 }
 
-loggedIn.get('/' , (req, res) => {
+loggedIn.get('/', isAuthenticated, (req, res) => {
   res.render('homepage.ejs');
 });
 
