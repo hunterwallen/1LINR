@@ -6,6 +6,7 @@ const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
+const session = require('express-session')
 require('dotenv').config()
 //___________________
 //Port
@@ -22,7 +23,9 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
 // May or may not need these depending on your Mongoose version
-mongoose.connect(MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }
+mongoose.connect(MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
+  console.log("Mongod is listening...");
+}
 );
 
 // Error / success
@@ -44,7 +47,13 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
-
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+)
 //___________________
 // Routes
 //___________________
@@ -52,6 +61,14 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 const loggedInController = require('./controllers/loggedin.js')
 app.use('/', loggedInController)
 
+const gatekeeperController = require('./controllers/gatekeeper.js')
+app.use('/gatekeeper', gatekeeperController)
+
+const newusersController = require('./controllers/newusers.js')
+app.use('/newusers', newusersController)
+
+const sessionsController = require('./controllers/sessions.js')
+app.use('/sessions', sessionsController)
 
 //___________________
 //Listener
