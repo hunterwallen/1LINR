@@ -20,7 +20,7 @@ const userSchema = new Schema ({
                                                         }
                                                       }
                                                       return true
-                                                    }, message: 'You must provide a valid image URL'}}
+                                                    }, message: 'Your about me section cannot include links or images.'}}
 })
 
 
