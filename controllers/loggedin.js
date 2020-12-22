@@ -10,7 +10,7 @@ const isAuthenticated = (req, res, next) => {
 }
 
 loggedIn.get('/' , (req, res) => {
-  res.send('Hello World!');
+  res.render('homepage.ejs');
 });
 
 
