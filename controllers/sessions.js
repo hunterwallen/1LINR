@@ -1,10 +1,27 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
 const sessions = express.Router()
-
+const User = require('../models/userinfo.js')
 
 sessions.get('/', (req, res) => {
   res.render('sessions/login.ejs')
+})
+
+sessions.post('/', (req, res) => {
+  User.findOne({username:req.body.username}, (err, foundUser) => {
+    if(err) {
+      console.log(err);
+    } else if (!foundUser) {
+      console.log('username does not exist');
+    } else {
+      if(bcrypt.compareSync(req.body.password, foundUser.password)) {
+        req.session.currentUser = foundUser
+        res.redirect('/')
+      } else {
+        console.log('We don\'t recognize that password. Try again');
+      }
+    }
+  })
 })
 
 
