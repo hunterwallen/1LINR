@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const Schema = mongoose.Schema
 
 const userSchema = new Schema ({
   username:{type:String, unique: true, required: true},
@@ -13,7 +13,7 @@ const userSchema = new Schema ({
                             }}, message: 'Your password must be between 7 and 16 characters.'}, validate: {
                                                     validator: (str) => {
                                                       for(let i = 0; i < str.length; i++) {
-                                                        if (str[i] === ('!' || '@' || '#' || '$' || '%' || '^' || '&' || '*') {
+                                                        if (str[i] === '!' || str[i] === '@' || str[i] === '#' || str[i] === '$' || str[i] === '%' || str[i] === '^' || str[i] === '&' || str[i] === '*') {
                                                             return true
                                                           }
                                                         }
@@ -21,7 +21,8 @@ const userSchema = new Schema ({
                                                     }, message: 'Your password must contain at least one of the following: ! @ # $ % ^ & *.'}},
   location:{type:String, required: true, validate: {
                           validator: (str) => {
-                            let thisFormat = str.slice(str.length-4, str.lengt-2)
+                            let thisLocation = JSON.stringify(str)
+                            let thisFormat = thisLocation.slice((thisLocation.length-5), (thisLocation.length-3))
                               if (thisFormat === ', ') {
                                   return true
                                 } else {
@@ -48,3 +49,6 @@ const userSchema = new Schema ({
 
 
 const User = mongoose.model('User', userSchema)
+
+
+module.exports = User
