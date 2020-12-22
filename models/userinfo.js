@@ -19,7 +19,14 @@ const userSchema = new Schema ({
                                                         }
                                                         return false
                                                     }, message: 'Your password must contain at least one of the following: ! @ # $ % ^ & *.'}},
-  location:{type:String, required: true},
+  location:{type:String, required: true, validate: {
+                          validator: (str) => {
+                            let thisFormat = str.slice(str.length-4, str.lengt-2)
+                              if (thisFormat === ', ') {
+                                  return true
+                                } else {
+                              return false
+                          }}, message: 'Your location must be in the following format: City, ST'}},
   about:{type:String,validate: {
                           validator: (str) => {
                             let length = str.length
