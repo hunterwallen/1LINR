@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <%-include('./partials/head.ejs')%>
+  <body>
+    <h1>Edit Delete Post Page</h1>
+    <%-include('./partials/nav.ejs')%>
+    <form class="newPost" action="/editpost/<%=currentUser._id%>/<%=currentPostIndex%>/?_method=PUT" method="POST">
+      <input type="text" name="title" value="<%=currentPost.title%>">
+      <input type="text" name="body" value="<%=currentPost.body%>">
+      <input type="submit" value="Edit Post">
+    </form>
+  </body>
+</html>

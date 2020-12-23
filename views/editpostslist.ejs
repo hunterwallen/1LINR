@@ -15,7 +15,7 @@
             </div>
             <h4><%=currentUser.post[i].body%></h4>
             <div class="likeDislikeFeed">
-              <a href="#">Edit Post</a>
+              <a href="/editpost/<%=currentUser._id%>/<%=i%>">Edit Post</a>
               <form class="deletePostBtn" action="index.html" method="post">
                 <input type="submit" value="Delete Post">
               </form>

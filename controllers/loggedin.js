@@ -29,10 +29,18 @@ loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
   })
 })
 
-loggedIn.get('/editlist/:id', isAuthenticated, (req, res) => {
-  User.findById( req.params.id, (err, foundUser) => {
+loggedIn.get('/editlist/', isAuthenticated, (req, res) => {
     res.render('editpostslist.ejs', {
       currentUser: req.session.currentUser
+    })
+})
+loggedIn.get('/editpost/:id/:postIndex', isAuthenticated, (req, res) => {
+  let userID = req.params.id
+  User.findById( userID, (err, foundUser) => {
+    res.render('editpostssingle.ejs', {
+      currentUser: req.session.currentUser,
+      currentPost: req.session.currentUser.post[req.params.postIndex],
+      currentPostIndex: req.params.postIndex
     })
   })
 })
@@ -49,5 +57,17 @@ loggedIn.post('/newpost/:id', (req, res) => {
   })
 })
 
+loggedIn.put('/editpost/:id/:postindex', (req, res) => {
+  let userId = req.params.id
+  User.findById( userId, (err, foundUser) => {
+    Post.create(req.body, (err, createdPost) => {
+      foundUser.post.splice(req.params.postindex, 1, createdPost)
+      foundUser.save((err, data) => {
+        req.session.currentUser = foundUser
+        res.redirect('/editlist/')
+      })
+    })
+  })
+})
 
 module.exports = loggedIn
