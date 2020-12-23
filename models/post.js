@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const postSchema = new Schema ({
-  name:{type:String, required: true, validate: {
+  title:{type:String, required: true, validate: {
                           validator: (str) => {
                           let length = str.length
                           if(length > 15) {
@@ -22,11 +22,11 @@ const postSchema = new Schema ({
   body:{type:String,validate: {
                           validator: (str) => {
                             let length = str.length
-                            if(length > 25) {
+                            if(length > 50) {
                                 return false
                               } else {
                               return true
-                            }}, message: 'Your post cannot be longer than 25 characters.'}, validate: {
+                            }}, message: 'Your post cannot be longer than 50 characters.'}, validate: {
                                     validator: (str) => {
                                       for(let i = 0; i < str.length-4; i++) {
                                         let thisThree= str.slice(i, (i+4))
@@ -39,4 +39,6 @@ const postSchema = new Schema ({
     })
 
 
-const User = mongoose.model('User', userSchema)
+const Post = mongoose.model('Post', postSchema)
+
+module.exports = Post

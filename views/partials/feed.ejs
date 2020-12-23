@@ -1,0 +1,10 @@
+<div class="feedDiv">
+  <ul>
+    <%for(i in allUsers){%>
+      <li>
+        <h3><%=allUsers[i].post[0]%></h3>
+        <%-include('./likedislikediv.ejs')%>
+      </li>
+    <%}%>
+  </ul>
+</div>
