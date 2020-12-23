@@ -20,8 +20,8 @@ loggedIn.get('/', isAuthenticated, (req, res) => {
   })
 });
 
-loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
-  User.findById( req.params.id, (err, foundUser) => {
+loggedIn.get('/userpage/:name', isAuthenticated, (req, res) => {
+  User.findOne( {username: req.params.name}, (err, foundUser) => {
     res.render('userpage.ejs', {
       user: foundUser,
       currentUser: req.session.currentUser
