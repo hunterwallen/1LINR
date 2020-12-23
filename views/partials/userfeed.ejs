@@ -1,13 +1,13 @@
 <div class="feedDiv">
   <ul>
-    <% if (currentUser.post[0]){%>
-      <% for(i in currentUser.post) { %>
+    <% if (user.post[0]){%>
+      <% for(i in user.post) { %>
       <li>
         <div class="titleNameFeed">
-          <h3><%=currentUser.post[i].title%></h3>
-          <h5>by <%=currentUser.username%></h5>
+          <h3><%=user.post[i].title%></h3>
+          <h5>by <%=user.username%></h5>
         </div>
-        <h4><%=currentUser.post[i].body%></h4>
+        <h4><%=user.post[i].body%></h4>
         <div class="likeDislikeFeed">
         <%-include('./likedislikediv.ejs')%>
         </div>
