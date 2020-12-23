@@ -4,6 +4,7 @@ const loggedIn = express.Router()
 const User = require('../models/userinfo.js')
 const Post = require('../models/post.js')
 const seed = require('../models/userseed.js')
+const postseed = require('../models/postseed.js')
 
 const isAuthenticated = (req, res, next) => {
   if(req.session.currentUser) {
@@ -21,10 +22,31 @@ loggedIn.get('/createusers/seed', (req, res) => {
       console.log(err.message);
     } else {
     console.log('user is created', createdUser);
+      }
+    })
   }
+  res.redirect('/')
 })
-}
-res.redirect('/')
+
+loggedIn.get('/createposts/seed', (req, res) => {
+  User.find({}, (err, allUsers) => {
+    for(i in allUsers) {
+      let thisUserID = allUsers[i]._id
+      User.findById( thisUserID, (err, foundUser) => {
+        Post.create(postseed, (err, createdPost) => {
+          if(err) {
+            console.log(err.message);
+          } else {
+            foundUser.post.unshift(createdPost)
+            foundUser.save((err, data) => {
+              console.log('post successfully seeded to', foundUser.username);
+            })
+          }
+        })
+      })
+    }
+  })
+  res.redirect('/')
 })
 
 loggedIn.get('/', isAuthenticated, (req, res) => {
