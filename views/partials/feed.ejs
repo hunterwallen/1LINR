@@ -1,10 +1,18 @@
 <div class="feedDiv">
   <ul>
     <%for(i in allUsers){%>
+      <% if (allUsers[i].post[0]){%>
       <li>
-        <h3><%=allUsers[i].post[0]%></h3>
+        <div class="titleNameFeed">
+          <h3><%=allUsers[i].post[0].title%></h3>
+          <h5>by <a href="#"><%=allUsers[i].username%></a></h5>
+        </div>
+        <h4><%=allUsers[i].post[0].body%></h4>
+        <div class="likeDislikeFeed">
         <%-include('./likedislikediv.ejs')%>
+        </div>
       </li>
+      <%}%>
     <%}%>
   </ul>
 </div>

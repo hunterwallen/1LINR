@@ -2,9 +2,7 @@
   <%-include('./partials/head.ejs')%>
   <body>
     <h1>Homepage</h1>
-    <form class="logout" action="/sessions/?_method=DELETE" method="POST">
-      <input type="submit" value="Log Out">
-    </form>
+    <%-include('./partials/nav.ejs')%>
     <%-include('./partials/newpost.ejs')%>
     <%-include('./partials/feed.ejs')%>
   </body>
