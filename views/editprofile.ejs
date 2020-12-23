@@ -1,0 +1,17 @@
+<html lang="en" dir="ltr">
+  <%-include('./partials/head.ejs')%>
+  <body>
+    <h1>Edit Profile</h1>
+    <form class="authenticationForm" action="/edituser/<%=currentUser._id%>/?_method=PUT" method="POST">
+      <h3 for="username">Username:</h3>
+      <input type="text" name="username" value="<%=currentUser.username%>" id='username'>
+      <h3 for='password'>Password</h3>
+      <input type="password" name="password" placeholder="password..." id='password'>
+      <h3 for='location'>Location</h3>
+      <input type="text" name="location" value="<%=currentUser.location%>" id='location'>
+      <h3 for='about'>Describe Yourself</h3>
+      <textarea name="about" id='about'><%=currentUser.about%></textarea>
+      <br/><input type="submit" value="Update" class='submitUser'>
+    </form>
+  </body>
+</html>

@@ -83,6 +83,12 @@ loggedIn.get('/editpost/:id/:postIndex', isAuthenticated, (req, res) => {
   })
 })
 
+loggedIn.get('/edituser/:id', (req, res) => {
+  res.render('editprofile.ejs', {
+    currentUser: req.session.currentUser
+  })
+})
+
 loggedIn.post('/newpost/:id', (req, res) => {
   let userID = req.params.id
   User.findById(userID, (err, foundUser) => {
@@ -105,6 +111,31 @@ loggedIn.put('/editpost/:id/:postindex', (req, res) => {
         res.redirect('/editlist/')
       })
     })
+  })
+})
+
+loggedIn.put('/edituser/:id', (req, res) => {
+  let userID = req.params.id
+  req.body.post = req.session.currentUser.post
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+  User.create(req.body, (err, user) => {
+    if(err) {
+      console.log(err.message);
+    } else {
+      console.log(user);
+      User.findByIdAndRemove(userID, (err, data) => {
+        if(err){
+          console.log(err.message);
+        } else {
+          console.log('old data deleted');
+          user._id = userID
+          user.save((err, data) => {
+            console.log('profile updated');
+            res.redirect('/')
+          })
+        }
+      })
+    }
   })
 })
 
