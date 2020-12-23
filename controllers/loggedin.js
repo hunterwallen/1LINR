@@ -20,7 +20,7 @@ loggedIn.get('/', isAuthenticated, (req, res) => {
   })
 });
 
-loggedIn.get('/userpage/:id', (req, res) => {
+loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
   User.findById( req.params.id, (err, foundUser) => {
     res.render('userpage.ejs', {
       user: foundUser,

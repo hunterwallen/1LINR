@@ -1,4 +1,5 @@
 <nav class='topNav'>
+  <a href="/">Home</a>
   <img src="" alt="<%=currentUser.username%>'s Profile Pic">
   <ul class='topNav'>
     <li><a href="/userpage/<%=currentUser._id%>"><%=currentUser.username%></a></li>
@@ -6,8 +7,10 @@
     <li><a href="#">People Watching Me</a></li>
     <li><a href="#">New People to Watch</a></li>
     <li><a href="#">Settings</a></li>
+    <li>
+      <form class="logout" action="/sessions/?_method=DELETE" method="POST">
+        <input type="submit" value="Log Out">
+      </form>
+    </li>
   </ul>
-  <form class="logout" action="/sessions/?_method=DELETE" method="POST">
-    <input type="submit" value="Log Out">
-  </form>
 </nav>

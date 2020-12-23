@@ -1,0 +1,20 @@
+<div class="feedDiv">
+  <ul>
+    <% if (currentUser.post[0]){%>
+      <% for(i in currentUser.post) { %>
+      <li>
+        <div class="titleNameFeed">
+          <h3><%=currentUser.post[i].title%></h3>
+          <h5>by <a href="#"><%=currentUser.username%></a></h5>
+        </div>
+        <h4><%=currentUser.post[i].body%></h4>
+        <div class="likeDislikeFeed">
+        <%-include('./likedislikediv.ejs')%>
+        </div>
+      </li>
+      <%}%>
+    <%} else {%>
+      <li>When you make posts, this is where we'll save them for you!</li>
+    <%}%>
+  </ul>
+</div>
