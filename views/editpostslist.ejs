@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <%-include('./partials/head.ejs')%>
+  <body>
+    <h1>Edit Delete List Page</h1>
+    <%-include('./partials/nav.ejs')%>
+    <div class="editDeleteListDiv">
+      <ul>
+        <% if (currentUser.post[0]){%>
+          <% for(i in currentUser.post) { %>
+          <li>
+            <div class="titleNameFeed">
+              <h3><%=currentUser.post[i].title%></h3>
+              <h5>by <a href="#"><%=currentUser.username%></a></h5>
+            </div>
+            <h4><%=currentUser.post[i].body%></h4>
+            <div class="likeDislikeFeed">
+              <a href="#">Edit Post</a>
+              <form class="deletePostBtn" action="index.html" method="post">
+                <input type="submit" value="Delete Post">
+              </form>
+            </div>
+          </li>
+          <%}%>
+        <%} else {%>
+          <li>When you make posts, this is where you will be able to edit or delete them!</li>
+        <%}%>
+      </ul>
+    </div>
+  </body>
+</html>

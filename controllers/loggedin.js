@@ -29,6 +29,14 @@ loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
   })
 })
 
+loggedIn.get('/editlist/:id', isAuthenticated, (req, res) => {
+  User.findById( req.params.id, (err, foundUser) => {
+    res.render('editpostslist.ejs', {
+      currentUser: req.session.currentUser
+    })
+  })
+})
+
 loggedIn.post('/newpost/:id', (req, res) => {
   let userID = req.params.id
   User.findById(userID, (err, foundUser) => {
