@@ -70,4 +70,15 @@ loggedIn.put('/editpost/:id/:postindex', (req, res) => {
   })
 })
 
+loggedIn.delete('/editpost/:id/:postindex', (req, res) => {
+  let userID = req.params.id
+  User.findById( userID, (err, foundUser) => {
+    foundUser.post.splice(req.params.postindex, 1)
+    foundUser.save((err, data) => {
+      req.session.currentUser = foundUser
+      res.redirect('/editlist/')
+    })
+  })
+})
+
 module.exports = loggedIn
