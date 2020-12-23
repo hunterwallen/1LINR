@@ -1,7 +1,9 @@
+const bcrypt = require('bcrypt')
 const express = require('express')
 const loggedIn = express.Router()
 const User = require('../models/userinfo.js')
 const Post = require('../models/post.js')
+const seed = require('../models/userseed.js')
 
 const isAuthenticated = (req, res, next) => {
   if(req.session.currentUser) {
@@ -10,6 +12,20 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/gatekeeper')
   }
 }
+
+loggedIn.get('/createusers/seed', (req, res) => {
+  for(i in seed){
+  seed[i].password = bcrypt.hashSync(seed[i].password, bcrypt.genSaltSync(10))
+  User.create(seed[i], (err, createdUser) => {
+    if (err) {
+      console.log(err.message);
+    } else {
+    console.log('user is created', createdUser);
+  }
+})
+}
+res.redirect('/')
+})
 
 loggedIn.get('/', isAuthenticated, (req, res) => {
   User.find({}, (err, allUsers) => {
