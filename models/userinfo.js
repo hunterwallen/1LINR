@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
+const multer = require('multer')
 const Schema = mongoose.Schema
 const Post = require('./post.js')
+const Image = require('./img.js')
 
 
 const userSchema = new Schema ({
@@ -47,6 +49,7 @@ const userSchema = new Schema ({
                                                       }
                                                       return true
                                                     }, message: 'Your about me section cannot include links or images.'}},
+  img:[Image.schema],
   post:[Post.schema]
 })
 

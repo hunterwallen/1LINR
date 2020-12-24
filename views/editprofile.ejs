@@ -1,6 +1,11 @@
 <html lang="en" dir="ltr">
   <%-include('./partials/head.ejs')%>
   <body>
+    <form action="/addphoto/<%=currentUser._id%>" method="POST" enctype="multipart/form-data">
+      <h1>Add a Profile Picture</h1>
+      <input type="file" name="img">
+      <input type="submit" value="Upload Image">
+    </form>
     <h1>Edit Profile</h1>
     <form class="authenticationForm" action="/edituser/<%=currentUser._id%>/?_method=PUT" method="POST">
       <h3 for="username">Username:</h3>

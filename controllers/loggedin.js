@@ -1,10 +1,25 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
 const loggedIn = express.Router()
+const fs = require('fs')
+const path = require('path')
+const multer = require('multer')
 const User = require('../models/userinfo.js')
 const Post = require('../models/post.js')
+const Image = require('../models/img.js')
 const seed = require('../models/userseed.js')
 const postseed = require('../models/postseed.js')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads')
+  }, filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+const upload = multer({storage: storage})
+
 
 const isAuthenticated = (req, res, next) => {
   if(req.session.currentUser) {
@@ -83,7 +98,7 @@ loggedIn.get('/editpost/:id/:postIndex', isAuthenticated, (req, res) => {
   })
 })
 
-loggedIn.get('/edituser/:id', (req, res) => {
+loggedIn.get('/edituser/:id', isAuthenticated, (req, res) => {
   res.render('editprofile.ejs', {
     currentUser: req.session.currentUser
   })
@@ -97,6 +112,26 @@ loggedIn.post('/newpost/:id', (req, res) => {
       foundUser.save((err, data) => {
         res.redirect('/')
       })
+    })
+  })
+})
+
+loggedIn.post('/addphoto/:id', upload.single('img'), (req, res) => {
+  let userId = req.params.id
+  let img = {
+    img:{
+      data: fs.readFileSync(path.join('./' + 'uploads/' + req.file.filename))
+    }
+  }
+  User.findById ( userId, (err, foundUser) => {
+    Image.create(img, (err, uploadedImage) => {
+      if(err) {
+        console.log(err.message);
+      } else {
+        foundUser.img = uploadedImage
+        foundUser.save()
+        res.redirect('/')
+      }
     })
   })
 })

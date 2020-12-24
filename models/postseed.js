@@ -1,4 +1,4 @@
 module.exports = {
     title: 'Seed Post 1',
-    body: 'This was seeded to test funcitonality.'
+    body: 'This was seeded to test functionality.'
   }
