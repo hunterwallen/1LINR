@@ -63,6 +63,7 @@ loggedIn.get('/', isAuthenticated, (req, res) => {
     res.render('homepage.ejs', {
       allUsers: allUsers,
       currentUser: req.session.currentUser,
+      user: 0
       // profilePic: req.session.currentUser.img[0].img.data
     });
   })

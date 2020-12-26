@@ -1,4 +1,19 @@
-<div class="likeDislikeDiv">
-  <a href="#">Like</a>
-  <a href="#">Dislike</a>
-</div>
+<% if (user) {%>
+  <div class="likeDislikeDiv">
+    <form action="/like/<%=user._id%>/<%=user.post[i]._id%>/?_method=PUT" method="POST">
+      <input type="submit" value="Like">
+    </form>
+    <form action="/dislike/<%=user._id%>/<%=user.post[i]._id%>/?_method=PUT" method="POST">
+      <input type="submit" value="Dislike">
+    </form>
+  </div>
+<%} else {%>
+  <div class="likeDislikeDiv">
+    <form action="/like/<%=allUsers[i]._id%>/<%=allUsers[i].post[0]._id%>/?_method=PUT" method="POST">
+      <input type="submit" value="Like">
+    </form>
+    <form action="/dislike/<%=allUsers[i]._id%>/<%=allUsers[i].post[0]._id%>/?_method=PUT" method="POST">
+      <input type="submit" value="Dislike">
+    </form>
+  </div>
+<%}%>
