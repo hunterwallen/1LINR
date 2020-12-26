@@ -8,25 +8,25 @@
           <div class="nameDateFeed">
             <h5>by <%=user.username%></h5>
             <h5>
-              <% if(Number(user.post[i].updatedAt.getMinutes()) < 10 ) {
-                let minutes = ('0' + user.post[i].updatedAt.getMinutes())
-                if(Number(user.post[i].updatedAt.getHours()) <= 11) { %>
-                  <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' AM'%>
-                  <%} else if(Number(user.post[i].updatedAt.getHours()) === 12) {%>
-                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' PM'%>
+              <% if(Number(user.post[i].createdAt.getMinutes()) < 10 ) {
+                let minutes = ('0' + user.post[i].createdAt.getMinutes())
+                if(Number(user.post[i].createdAt.getHours()) <= 11) { %>
+                  <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' AM'%>
+                  <%} else if(Number(user.post[i].createdAt.getHours()) === 12) {%>
+                    <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' PM'%>
                   <%} else {
-                    let hours = (Number(user.post[i].updatedAt.getHours()) - 12).toString() %>
-                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                    let hours = (Number(user.post[i].createdAt.getHours()) - 12).toString() %>
+                    <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
                   <%}%>
               <%} else {
-                let minutes = user.post[i].updatedAt.getMinutes()
-                if(Number(user.post[i].updatedAt.getHours()) <= 11) { %>
-                  <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' AM'%>
-                  <%} else if(Number(user.post[i].updatedAt.getHours()) === 12) {%>
-                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' PM'%>
+                let minutes = user.post[i].createdAt.getMinutes()
+                if(Number(user.post[i].createdAt.getHours()) <= 11) { %>
+                  <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' AM'%>
+                  <%} else if(Number(user.post[i].createdAt.getHours()) === 12) {%>
+                    <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' PM'%>
                   <%} else {
-                    let hours = (Number(user.post[i].updatedAt.getHours()) - 12).toString() %>
-                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                    let hours = (Number(user.post[i].createdAt.getHours()) - 12).toString() %>
+                    <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
                   <%}%>
               <%}%>
             </h5>
@@ -34,7 +34,10 @@
         </div>
         <h4><%=user.post[i].body%></h4>
         <div class="likeDislikeFeed">
-        <%-include('./likedislikediv.ejs')%>
+          <h5><%=user.post[i].like%> Likes  |  <%=user.post[i].dislike%> Dislikes</h5>
+          <%if(currentUser.username !== user.username) {%>
+            <%-include('./likedislikediv.ejs')%>
+          <%}%>
         </div>
       </li>
       <%}%>

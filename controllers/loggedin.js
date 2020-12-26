@@ -173,18 +173,61 @@ loggedIn.put('/edituser/:id', (req, res) => {
   })
 })
 
-loggedIn.put('/like/:userID/:postID', (req, res) => {
+loggedIn.put('/like/:userID/:postID/:postIndex', (req, res) => {
   let userID = req.params.userID
   let postID = req.params.postID
   User.findById( userID, (err, foundUser) => {
-    Post.findByIdAndUpdate ( postID, {$inc: {'post.like': 1}}, {new: true}, (err, foundPost) => {
-      console.log('postupdated', foundPost);
+    Post.findByIdAndUpdate ( postID, {$inc: {like: 1}}, {new: true}, (err, foundPost) => {
+      foundUser.post.splice(req.params.postIndex, 1, foundPost)
+      foundUser.save((err, data) => {
+      console.log('likeupdated', foundPost);
       res.redirect('/')
+    })
     })
   })
 })
 
+loggedIn.put('/dislike/:userID/:postID/:postIndex', (req, res) => {
+  let userID = req.params.userID
+  let postID = req.params.postID
+  User.findById( userID, (err, foundUser) => {
+    Post.findByIdAndUpdate ( postID, {$inc: {dislike: 1}}, {new: true}, (err, foundPost) => {
+      foundUser.post.splice(req.params.postIndex, 1, foundPost)
+      foundUser.save((err, data) => {
+      console.log('dislikeupdated', foundPost);
+      res.redirect('/')
+    })
+    })
+  })
+})
 
+loggedIn.put('/userlike/:userID/:postID/:postIndex', (req, res) => {
+  let userID = req.params.userID
+  let postID = req.params.postID
+  User.findById( userID, (err, foundUser) => {
+    Post.findByIdAndUpdate ( postID, {$inc: {like: 1}}, {new: true}, (err, foundPost) => {
+      foundUser.post.splice(req.params.postIndex, 1, foundPost)
+      foundUser.save((err, data) => {
+      console.log('likeupdated', foundPost);
+      res.redirect('/userpage/' + foundUser.username)
+    })
+    })
+  })
+})
+
+loggedIn.put('/userdislike/:userID/:postID/:postIndex', (req, res) => {
+  let userID = req.params.userID
+  let postID = req.params.postID
+  User.findById( userID, (err, foundUser) => {
+    Post.findByIdAndUpdate ( postID, {$inc: {dislike: 1}}, {new: true}, (err, foundPost) => {
+      foundUser.post.splice(req.params.postIndex, 1, foundPost)
+      foundUser.save((err, data) => {
+      console.log('dislikeupdated', foundPost);
+      res.redirect('/userpage/' + foundUser.username)
+    })
+    })
+  })
+})
 
 loggedIn.delete('/editpost/:id/:postindex', (req, res) => {
   let userID = req.params.id
