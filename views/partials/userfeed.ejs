@@ -5,7 +5,32 @@
       <li>
         <div class="titleNameFeed">
           <h3><%=user.post[i].title%></h3>
-          <h5>by <%=user.username%></h5>
+          <div class="nameDateFeed">
+            <h5>by <%=user.username%></h5>
+            <h5>
+              <% if(Number(user.post[i].updatedAt.getMinutes()) < 10 ) {
+                let minutes = ('0' + user.post[i].updatedAt.getMinutes())
+                if(Number(user.post[i].updatedAt.getHours()) <= 11) { %>
+                  <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' AM'%>
+                  <%} else if(Number(user.post[i].updatedAt.getHours()) === 12) {%>
+                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' PM'%>
+                  <%} else {
+                    let hours = (Number(user.post[i].updatedAt.getHours()) - 12).toString() %>
+                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                  <%}%>
+              <%} else {
+                let minutes = user.post[i].updatedAt.getMinutes()
+                if(Number(user.post[i].updatedAt.getHours()) <= 11) { %>
+                  <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' AM'%>
+                  <%} else if(Number(user.post[i].updatedAt.getHours()) === 12) {%>
+                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + user.post[i].updatedAt.getHours() + ':' + minutes + ' PM'%>
+                  <%} else {
+                    let hours = (Number(user.post[i].updatedAt.getHours()) - 12).toString() %>
+                    <%=user.post[i].updatedAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                  <%}%>
+              <%}%>
+            </h5>
+          </div>
         </div>
         <h4><%=user.post[i].body%></h4>
         <div class="likeDislikeFeed">
