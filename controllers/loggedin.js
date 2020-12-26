@@ -84,20 +84,20 @@ loggedIn.get('/editlist/', isAuthenticated, (req, res) => {
     })
 })
 
-loggedIn.get('/watched/:id', (req, res) => {
+loggedIn.get('/watched/:id', isAuthenticated, (req, res) => {
   User.findById( req.params.id, (err, foundUser) => {
     res.render('watchers.ejs', {
       currentUser: req.session.currentUser,
-      user: foundUser
+      user: foundUser || req.session.currentUser
     })
   })
 })
 
-loggedIn.get('/watching/:id', (req, res) => {
+loggedIn.get('/watching/:id', isAuthenticated, (req, res) => {
   User.findById( req.params.id, (err, foundUser) => {
     res.render('watching.ejs', {
       currentUser: req.session.currentUser,
-      user: foundUser
+      user: foundUser || req.session.currentUser
     })
   })
 })

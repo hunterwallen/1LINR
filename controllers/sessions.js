@@ -13,12 +13,14 @@ sessions.post('/', (req, res) => {
       console.log(err);
     } else if (!foundUser) {
       console.log('username does not exist');
+      res.send('<a href="/gatekeeper">Username Not Found</a>')
     } else {
       if(bcrypt.compareSync(req.body.password, foundUser.password)) {
         req.session.currentUser = foundUser
         res.redirect('/')
       } else {
         console.log('We don\'t recognize that password. Try again');
+        res.send('<a href="/gatekeeper">We don\'t recognize that password. Please try again.</a>')
       }
     }
   })

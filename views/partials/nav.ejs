@@ -3,8 +3,8 @@
   <img src='#'>
   <ul class='topNav'>
     <li><a href="/userpage/<%=currentUser.username%>"><%=currentUser.username%></a></li>
-    <li><a href="#">People I'm Watching</a></li>
-    <li><a href="#">People Watching Me</a></li>
+    <li><a href="/watching/<%=currentUser.username%>">People I'm Watching</a></li>
+    <li><a href="/watched/<%=currentUser.username%>">People Watching Me</a></li>
     <li><a href="#">New People to Watch</a></li>
     <li><a href="/editlist/">Edit My Posts</a></li>
     <li><a href="/edituser/<%=currentUser._id%>">Settings</a></li>
