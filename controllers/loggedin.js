@@ -176,6 +176,12 @@ loggedIn.put('/edituser/:id', (req, res) => {
 loggedIn.put('/like/:userID/:postID', (req, res) => {
   let userID = req.params.userID
   let postID = req.params.postID
+  User.findById( userID, (err, foundUser) => {
+    Post.findByIdAndUpdate ( postID, {$inc: {'post.like': 1}}, {new: true}, (err, foundPost) => {
+      console.log('postupdated', foundPost);
+      res.redirect('/')
+    })
+  })
 })
 
 
