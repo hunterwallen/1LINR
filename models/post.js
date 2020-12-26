@@ -35,7 +35,9 @@ const postSchema = new Schema ({
                                           }
                                         }
                                       return true
-                                    }, message: 'Your post cannot include links or images.'}}
+                                    }, message: 'Your post cannot include links or images.'}},
+    like:{type:Number, default: 0},
+    dislike:{type:Number, default: 0}
     }, {timestamps: true})
 
 

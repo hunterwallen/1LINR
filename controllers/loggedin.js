@@ -173,6 +173,13 @@ loggedIn.put('/edituser/:id', (req, res) => {
   })
 })
 
+loggedIn.put('/like/:userID/:postID', (req, res) => {
+  let userID = req.params.userID
+  let postID = req.params.postID
+})
+
+
+
 loggedIn.delete('/editpost/:id/:postindex', (req, res) => {
   let userID = req.params.id
   User.findById( userID, (err, foundUser) => {
