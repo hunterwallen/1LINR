@@ -6,7 +6,7 @@
         <div class="titleNameFeed">
           <h3><%=allUsers[i].post[0].title%></h3>
           <div class="nameDateFeed">
-              <h5>by <a href="/userpage/<%=allUsers[i].username%>"><%=allUsers[i].username%></a></h5>
+              <h5>by <a href="/userpage/<%=allUsers[i]._id%>"><%=allUsers[i].username%></a></h5>
               <h5>
                 <% if(Number(allUsers[i].post[0].createdAt.getMinutes()) < 10 ) {
                   let minutes = ('0' + allUsers[i].post[0].updatedAt.getMinutes())

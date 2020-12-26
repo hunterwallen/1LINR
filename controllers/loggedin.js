@@ -69,11 +69,26 @@ loggedIn.get('/', isAuthenticated, (req, res) => {
   })
 });
 
-loggedIn.get('/userpage/:name', isAuthenticated, (req, res) => {
-  User.findOne( {username: req.params.name}, (err, foundUser) => {
+loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
+  const checkWatching = (currentUserWatching, viewedUser) => {
+    let viewedId = viewedUser._id
+    let isWatching = false
+    for(let i = 0; i < currentUserWatching.length; i++) {
+      let thisWatching = currentUserWatching[i]._id
+      if(thisWatching.toString() === viewedId.toString()) {
+        isWatching = true
+        break
+      }
+    }
+    return isWatching
+  }
+  let userId = req.params.id
+  User.findById( userId , (err, foundUser) => {
+    let following = checkWatching(req.session.currentUser.watching, foundUser)
     res.render('userpage.ejs', {
       user: foundUser,
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      following: following
     })
   })
 })
