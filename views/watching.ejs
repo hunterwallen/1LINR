@@ -7,7 +7,7 @@
       <%if(!user.watching[0]) {%>
         <h3><%=user.username%> is not currently watching anybody</h3>
       <%} else {
-        for(i in user.watching) {
+        for(let i = 0; i < user.watching.length; i++) {
           let thisUser = user.watching[i]%>
           <a href='/userpage/<%=thisUser.username%>' class="miniUserCard">
             <img src="" alt="<%=thisUser.username%>'s Pic'">

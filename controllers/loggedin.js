@@ -85,10 +85,11 @@ loggedIn.get('/editlist/', isAuthenticated, (req, res) => {
 })
 
 loggedIn.get('/watched/:id', isAuthenticated, (req, res) => {
-  User.findById( req.params.id, (err, foundUser) => {
+  let userID = req.params.id
+  User.findById( userID, (err, foundUser) => {
     res.render('watchers.ejs', {
       currentUser: req.session.currentUser,
-      user: foundUser || req.session.currentUser
+      user: foundUser
     })
   })
 })
@@ -97,7 +98,7 @@ loggedIn.get('/watching/:id', isAuthenticated, (req, res) => {
   User.findById( req.params.id, (err, foundUser) => {
     res.render('watching.ejs', {
       currentUser: req.session.currentUser,
-      user: foundUser || req.session.currentUser
+      user: foundUser
     })
   })
 })
@@ -244,6 +245,32 @@ loggedIn.put('/userdislike/:userID/:postID/:postIndex', (req, res) => {
       console.log('dislikeupdated', foundPost);
       res.redirect('/userpage/' + foundUser.username)
     })
+    })
+  })
+})
+
+loggedIn.put('/watchuser/:userId/:requestId', (req, res) => {
+  let userToWatchID = req.params.requestId
+  let requestorID = req.params.userId
+  User.findById( requestorID, (err, requestor) => {
+    User.findById( userToWatchID, (err, userToWatch) => {
+      let requestorSpecs = {
+        _id: requestor._id,
+        username: requestor.username,
+        location: requestor.location
+      }
+      let userToWatchSpecs = {
+        _id: userToWatch._id,
+        username: userToWatch.username,
+        location: userToWatch.location
+      }
+      userToWatch.watched.push(requestorSpecs)
+      requestor.watching.push(userToWatchSpecs)
+      userToWatch.save((err, data) => {
+        requestor.save((err, data) => {
+          res.redirect('/userpage/' + userToWatch.username)
+        })
+      })
     })
   })
 })

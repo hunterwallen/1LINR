@@ -4,10 +4,10 @@
     <h1>Watchers</h1>
     <%-include('./partials/nav.ejs')%>
     <div class="watchingFullDiv">
-      <%if(!user.watching[0]) {%>
+      <%if(!user.watched[0]) {%>
         <h3><%=user.username%> is not currently being watched by anyone.</h3>
       <%} else {
-        for(i in user.watched) {
+        for(let i = 0; i < user.watched.length; i++) {
           let thisUser = user.watched[i]%>
           <a href='/userpage/<%=thisUser.username%>' class="miniUserCard">
             <img src="" alt="<%=thisUser.username%>'s Pic'">

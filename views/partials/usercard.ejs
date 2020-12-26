@@ -9,7 +9,7 @@
     <%-include('./watcherdiv.ejs')%>
     <%-include('./watchingdiv.ejs')%>
     <%if(currentUser.username !== user.username){%>
-      <form class="" action="index.html" method="post">
+      <form action="/watchuser/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST">
         <input type="submit" value="Start Watching">
       </form>
       <%}%>
