@@ -50,7 +50,9 @@ const userSchema = new Schema ({
                                                       return true
                                                     }, message: 'Your about me section cannot include links or images.'}},
   img:[Image.schema],
-  post:[Post.schema]
+  post:[Post.schema],
+  watching: {type:Array, default: []},
+  watched: {type: Array, default: []}
 })
 
 

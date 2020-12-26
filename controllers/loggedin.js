@@ -14,7 +14,6 @@ const storage = multer.memoryStorage()
 
 const upload = multer({storage: storage})
 
-
 const isAuthenticated = (req, res, next) => {
   if(req.session.currentUser) {
     next()
@@ -22,6 +21,7 @@ const isAuthenticated = (req, res, next) => {
     res.redirect('/gatekeeper')
   }
 }
+
 
 loggedIn.get('/createusers/seed', (req, res) => {
   for(i in seed){
@@ -83,6 +83,25 @@ loggedIn.get('/editlist/', isAuthenticated, (req, res) => {
       currentUser: req.session.currentUser
     })
 })
+
+loggedIn.get('/watched/:id', (req, res) => {
+  User.findById( req.params.id, (err, foundUser) => {
+    res.render('watchers.ejs', {
+      currentUser: req.session.currentUser,
+      user: foundUser
+    })
+  })
+})
+
+loggedIn.get('/watching/:id', (req, res) => {
+  User.findById( req.params.id, (err, foundUser) => {
+    res.render('watching.ejs', {
+      currentUser: req.session.currentUser,
+      user: foundUser
+    })
+  })
+})
+
 loggedIn.get('/editpost/:id/:postIndex', isAuthenticated, (req, res) => {
   let userID = req.params.id
   User.findById( userID, (err, foundUser) => {
