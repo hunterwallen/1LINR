@@ -5,4 +5,11 @@
     <h3><%=user.location%></h3>
     <h5><%=user.about%></h5>
   </div>
+  <%if(currentUser.username !== user.username){%>
+    <%-include('./watcherdiv.ejs')%>
+    <%-include('./watchingdiv.ejs')%>
+    <form class="" action="index.html" method="post">
+      <input type="submit" value="Start Watching">
+    </form>
+    <%}%>
 </div>
