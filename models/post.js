@@ -36,7 +36,7 @@ const postSchema = new Schema ({
                                         }
                                       return true
                                     }, message: 'Your post cannot include links or images.'}}
-    })
+    }, {timestamps: true})
 
 
 const Post = mongoose.model('Post', postSchema)

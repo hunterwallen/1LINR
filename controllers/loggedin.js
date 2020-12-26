@@ -10,13 +10,7 @@ const Image = require('../models/img.js')
 const seed = require('../models/userseed.js')
 const postseed = require('../models/postseed.js')
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './uploads')
-  }, filename: (req, file, cb) => {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-})
+const storage = multer.memoryStorage()
 
 const upload = multer({storage: storage})
 
@@ -68,7 +62,8 @@ loggedIn.get('/', isAuthenticated, (req, res) => {
   User.find({}, (err, allUsers) => {
     res.render('homepage.ejs', {
       allUsers: allUsers,
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      // profilePic: req.session.currentUser.img[0].img.data
     });
   })
 });
@@ -120,7 +115,8 @@ loggedIn.post('/addphoto/:id', upload.single('img'), (req, res) => {
   let userId = req.params.id
   let img = {
     img:{
-      data: fs.readFileSync(path.join('./' + 'uploads/' + req.file.filename))
+      data: req.file.img.buffer,
+      contentType: 'image/jpeg'
     }
   }
   User.findById ( userId, (err, foundUser) => {
@@ -129,8 +125,10 @@ loggedIn.post('/addphoto/:id', upload.single('img'), (req, res) => {
         console.log(err.message);
       } else {
         foundUser.img = uploadedImage
-        foundUser.save()
-        res.redirect('/')
+        foundUser.save((err, data) => {
+          req.session.currentUser = foundUser
+          res.redirect('/')
+        })
       }
     })
   })

@@ -5,7 +5,33 @@
       <li>
         <div class="titleNameFeed">
           <h3><%=allUsers[i].post[0].title%></h3>
-          <h5>by <a href="/userpage/<%=allUsers[i].username%>"><%=allUsers[i].username%></a></h5>
+          <div class="nameDateFeed">
+              <h5>by <a href="/userpage/<%=allUsers[i].username%>"><%=allUsers[i].username%></a></h5>
+              <h5>
+                <% if(Number(allUsers[i].post[0].updatedAt.getMinutes()) < 10 ) {
+                  let minutes = ('0' + allUsers[i].post[0].updatedAt.getMinutes())
+                  if(Number(allUsers[i].post[0].updatedAt.getHours()) <= 11) { %>
+                    <%=allUsers[i].post[0].updatedAt.toLocaleDateString('en-us') + ' ' + allUsers[i].post[0].updatedAt.getHours() + ':' + minutes + ' AM'%>
+                    <%} else if(Number(allUsers[i].post[0].updatedAt.getHours()) === 12) {%>
+                      <%=allUsers[i].post[0].updatedAt.toLocaleDateString('en-us') + ' ' + allUsers[i].post[0].updatedAt.getHours() + ':' + minutes + ' PM'%>
+                    <%} else {
+                      let hours = (Number(allUsers[i].post[0].updatedAt.getHours()) - 12).toString() %>
+                      <%=allUsers[i].post[0].updatedAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                    <%}%>
+                <%} else {
+                  let minutes = allUsers[i].post[0].updatedAt.getMinutes()
+                  if(Number(allUsers[i].post[0].updatedAt.getHours()) <= 11) { %>
+                    <%=allUsers[i].post[0].updatedAt.toLocaleDateString('en-us') + ' ' + allUsers[i].post[0].updatedAt.getHours() + ':' + minutes + ' AM'%>
+                    <%} else if(Number(allUsers[i].post[0].updatedAt.getHours()) === 12) {%>
+                      <%=allUsers[i].post[0].updatedAt.toLocaleDateString('en-us') + ' ' + allUsers[i].post[0].updatedAt.getHours() + ':' + minutes + ' PM'%>
+                    <%} else {
+                      let hours = (Number(allUsers[i].post[0].updatedAt.getHours()) - 12).toString() %>
+                      <%=allUsers[i].post[0].updatedAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                    <%}%>
+                <%}%>
+
+              </h5>
+          </div>
         </div>
         <h4><%=allUsers[i].post[0].body%></h4>
         <div class="likeDislikeFeed">
