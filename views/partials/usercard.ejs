@@ -12,6 +12,10 @@
       <form action="/watchuser/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST">
         <input type="submit" value="Start Watching">
       </form>
+      <%} else if ((currentUser.username !== user.username) && (following)){%>
+        <form action="/stopwatching/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST">
+          <input type="submit" value="Stop Watching">
+        </form>
       <%}%>
   </div>
 </div>

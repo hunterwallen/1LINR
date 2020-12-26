@@ -283,7 +283,42 @@ loggedIn.put('/watchuser/:userId/:requestId', (req, res) => {
       requestor.watching.push(userToWatchSpecs)
       userToWatch.save((err, data) => {
         requestor.save((err, data) => {
-          res.redirect('/userpage/' + userToWatch.username)
+          req.session.currentUser = requestor
+          res.redirect('/userpage/' + userToWatch._id)
+        })
+      })
+    })
+  })
+})
+
+
+loggedIn.put('/stopwatching/:userId/:requestId', (req, res) => {
+  let userToWatchID = req.params.requestId
+  let requestorID = req.params.userId
+  User.findById( requestorID, (err, requestor) => {
+    User.findById( userToWatchID, (err, userToWatch) => {
+      let indexOfRequestor = 0
+      let indexOfUser = 0
+      for(i in requestor.watching) {
+        let thisId = requestor.watching[i]._id
+        if (thisId.toString() === (userToWatch._id).toString()) {
+          indexOfUser = i
+          break
+        }
+      }
+      for(i in userToWatch.watched) {
+        let thisId = userToWatch.watched[i]._id
+        if (thisId.toString() === (requestor._id).toString()) {
+          indexOfRequestor = i
+          break
+        }
+      }
+      requestor.watching.splice(indexOfUser, 1)
+      userToWatch.watched.splice(indexOfRequestor, 1)
+      userToWatch.save((err, data) => {
+        requestor.save((err, data) => {
+          req.session.currentUser = requestor
+          res.redirect('/userpage/' + userToWatch._id)
         })
       })
     })
