@@ -1,0 +1,21 @@
+<footer>
+  <ul class="footerTop">
+    <li><a href="/userpage/<%=currentUser._id%>"><%=currentUser.username%></a></li>
+    <li><a href="/watching/<%=currentUser._id%>">People I'm Watching</a></li>
+    <li><a href="/watched/<%=currentUser._id%>">People Watching Me</a></li>
+    <li><a href="/lookaround/">New People to Watch</a></li>
+    <li><a href="/editlist/">Edit My Posts</a></li>
+    <li><a href="/edituser/<%=currentUser._id%>">Settings</a></li>
+    <li>
+      <form class="logout" action="/sessions/?_method=DELETE" method="POST">
+        <input type="submit" value="Log Out">
+      </form>
+    </li>
+  </ul>
+  <ul class="footerBtm">
+    <li><a href="https://hunterwallen.github.io/">Creator's Page</a></li>
+    <li><a href="https://hunterwallen.github.io/projects.ht">Creator's Projects</a></li>
+    <li><a href="https://hunterwallen.github.io/contact.html">Contact Me</a></li>
+    <li><a href="https://theoutspokenoutcast.wordpress.com/">Creator's Blog</a></li>
+  </ul>
+</footer>
