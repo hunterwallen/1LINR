@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <%-include('./partials/head.ejs')%>
   <body>
+    <%-include('./partials/header.ejs')%>
     <h1>Edit Delete Post Page</h1>
     <%-include('./partials/nav.ejs')%>
     <form class="newPost" action="/editpost/<%=currentUser._id%>/<%=currentPostIndex%>/?_method=PUT" method="POST">

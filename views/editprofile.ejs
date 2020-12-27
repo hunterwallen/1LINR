@@ -1,6 +1,7 @@
 <html lang="en" dir="ltr">
   <%-include('./partials/head.ejs')%>
   <body>
+    <%-include('./partials/header.ejs')%>
     <form action="/addphoto/<%=currentUser._id%>" method="POST" enctype="multipart/form-data">
       <h1>Add a Profile Picture</h1>
       <input type="file" name="img">
