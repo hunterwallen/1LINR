@@ -99,6 +99,15 @@ loggedIn.get('/editlist/', isAuthenticated, (req, res) => {
     })
 })
 
+loggedIn.get('/lookaround/', isAuthenticated, (req, res) => {
+  User.find({}, (err, allUsers) => {
+    res.render('lookaround.ejs', {
+      allUsers: allUsers,
+      currentUser: req.session.currentUser
+    })
+  })
+})
+
 loggedIn.get('/watched/:id', isAuthenticated, (req, res) => {
   let userID = req.params.id
   User.findById( userID, (err, foundUser) => {
