@@ -2,8 +2,8 @@
   <%-include('./partials/head.ejs')%>
   <body>
     <%-include('./partials/header.ejs')%>
-    <h1>Watchers</h1>
     <%-include('./partials/nav.ejs')%>
+    <h1>Watchers</h1>
     <div class="watchingFullDiv">
       <%if(!user.watched[0]) {%>
         <h3><%=user.username%> is not currently being watched by anyone.</h3>

@@ -31,13 +31,14 @@ header {
 
 
 .homeNav{
-  width: 6em;
-  height: 3.5em;
+  width: 4em;
+  height: 100%;
   text-align: center;
-  padding: 1.25em;
+  padding: .6em;
   text-decoration: none;
   color: #021670;
   box-sizing: border-box;
+  font-size: 1.5em;
 }
 
 .homeNav:hover {
