@@ -1,6 +1,7 @@
 <html lang="en" dir="ltr">
   <%-include('../partials/head.ejs')%>
   <body>
+    <%-include('../partials/header.ejs')%>
     <h1>Create Account</h1>
     <form class="authenticationForm" action="/newusers/" method="POST">
       <h3 for="username">Username:</h3>
@@ -13,5 +14,6 @@
       <textarea name="about" id='about'>Tell us about yourself in 250 characters or less...</textarea>
       <br/><input type="submit" value="Create Account" class='submitUser'>
     </form>
+    <%-include('../partials/gatekeeperFooter.ejs')%>
   </body>
 </html>
