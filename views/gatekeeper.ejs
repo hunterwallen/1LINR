@@ -1,12 +1,20 @@
 <html lang="en" dir="ltr">
   <%-include('./partials/head.ejs')%>
   <body>
-    <div class="gatekeeperWelcome">
-      <%-include('./partials/header.ejs')%>
-      <h1>Welcome to 1LINR!</h1>
-      <h3>Please sign in or create an account to continue!</h3>
-      <a href="/sessions/" class='gatekeeperBtn'>Sign In</a>
-      <a href="/newusers/" class='gatekeeperBtn'>Create Account</a>
+    <div class="gatekeeperFullPageDiv">
+      <img src="https://i.imgur.com/cDB6oUi.png" alt="1LINR Logo">
+      <div class="gatekeeperWelcome">
+        <h3>Let's Get Started</h3>
+        <div class="landingLinks">
+          <form action="/sessions/" method="POST" class="landingLogIn">
+            <input type="text" name="username" placeholder="username" class='logintext'>
+            <input type="password" name="password" placeholder="password" class='logintext'>
+            <br/><input type="submit" value="Login" class='submitLogin'>
+          </form>
+          <p class='newUserMessage'>Or, if you're new around here...</p>
+          <a href="/newusers/" class='gatekeeperBtn'>Create Account</a>
+        </div>
+      </div>
     </div>
     <%-include('./partials/gatekeeperFooter.ejs')%>
   </body>

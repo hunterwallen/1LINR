@@ -2,6 +2,12 @@ body {
   margin: 0;
   width: 100%;
   overflow-x: hidden;
+  font-family: 'Montserrat', sans-serif;
+  background-color: whitesmoke;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Heebo', sans-serif;
 }
 
 /* header */
@@ -27,6 +33,7 @@ header {
   margin-bottom: 2em;
   border-top: 2px solid #D1B30A;
   border-bottom: 2px solid #D1B30A;
+  font-family: 'Heebo', sans-serif;
 }
 
 
@@ -34,7 +41,7 @@ header {
   width: 4em;
   height: 100%;
   text-align: center;
-  padding: .6em;
+  padding: .5em;
   text-decoration: none;
   color: #021670;
   box-sizing: border-box;
@@ -49,7 +56,7 @@ header {
 
 .navDropDown {
   width: 6em;
-  height: 3.5em;
+  height: 3.7em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,7 +72,7 @@ header {
 .navImg {
   height: 3em;
   border-radius: 3em;
-  padding: .25em 0 .35em 0;
+  padding: .35em 0 .45em 0;
 }
 
 .topNavUL {
@@ -86,8 +93,10 @@ header {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: space-around;
   width: 10em;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 3em;
 }
 
 .topNavUL li a {
@@ -110,7 +119,7 @@ header {
 
 .logout input {
   display: block;
-  padding: .5em;
+  padding: 1em;
   width: 100%;
   text-align: left;
   background-color: inherit;
@@ -122,4 +131,94 @@ header {
 .logout input:hover {
   cursor: pointer;
   background-color: #FFDB0D;
+}
+
+
+/* landing page (gatekeeper) */
+.gatekeeperFullPageDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gatekeeperWelcome {
+  text-align: center;
+  margin: 0 auto 2em auto;
+  width: 80vw;
+  min-height: 30em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F0CE0E;
+  color: #031770;
+  border-radius: 5px;
+  filter: drop-shadow(3px 3px 5px rgb(200, 200, 200));
+}
+
+.gatekeeperWelcome h3 {
+  font-size: 2em;
+  text-shadow: 2px 2px #FFDB0D;
+  margin: 0 0 .5em 0;
+}
+
+.landingLogIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logintext {
+  font-size: 1.25em;
+  padding: .75em;
+  margin: .5em;
+  border-radius: 5px;
+  border: 2px solid white;
+  filter: drop-shadow(0 0 5px #F0CE0E);
+}
+
+.logintext:focus {
+  outline: none;
+  border: 2px solid #7F7E80;
+  filter: drop-shadow(0 0 5px #7F7E80);
+}
+
+.submitLogin {
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.25em;
+  color: whitesmoke;
+  border: none;
+  background-color: #7F7E80;
+  width: 10em;
+  padding: .5em;
+  border-radius: 5px;
+  filter: drop-shadow(0 0 5px #7F7E80);
+}
+
+.submitLogin:hover {
+  cursor: pointer;
+}
+
+.submitLogin:focus {
+  outline: none;
+  border: #031770;
+  filter: drop-shadow(0 0 2px #7F7E80);
+}
+
+.newUserMessage {
+  margin: 2.5em 0 1.5em 0;
+}
+
+.gatekeeperBtn {
+  display: inline-block;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.25em;
+  text-decoration: none;
+  color: whitesmoke;
+  border: none;
+  background-color: #031770;
+  width: 10em;
+  padding: .5em 0;
+  border-radius: 5px;
+  filter: drop-shadow(0 0 5px #7F7E80);
 }
