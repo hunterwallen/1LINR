@@ -486,9 +486,9 @@ header {
 }
 
 .miniUserCard {
-  padding: 1em;
   margin: 1em;
-  width: 10em;
+  width: 7.5em;
+  height: 11em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -514,4 +514,8 @@ header {
 
 .miniUserCard h4, .miniUserCard h5 {
   margin: .5em;
+}
+
+.miniUserCard h5 {
+  font-size: .75em;
 }
