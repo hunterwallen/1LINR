@@ -1,6 +1,21 @@
 <a href="/watching/<%=user._id%>">
   <h3>Curently Watching</h3>
+  </a>
   <div class="watchDiv">
-
+    <%if(!user.watching[0]) {%>
+      <h3><%=user.username%> is not currently watching anybody</h3>
+    <%} else {
+      for(let i = 0; i <= 6; i++) {
+        let thisUser = user.watching[i]
+        if(thisUser) {%>
+        <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
+          <img src="" alt="<%=thisUser.username%>'s Pic'">
+          <h4><%=thisUser.username%></h4>
+          <h5><%=thisUser.location%></h5>
+        </a>
+        <%} else {
+          break
+        }%>
+      <%}%>
+    <%}%>
   </div>
-</a>

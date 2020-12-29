@@ -34,6 +34,8 @@ header {
   border-top: 2px solid #D1B30A;
   border-bottom: 2px solid #D1B30A;
   font-family: 'Heebo', sans-serif;
+  position: sticky;
+  top: 0;
 }
 
 
@@ -379,4 +381,19 @@ header {
   filter: drop-shadow(0 0 5px #F0CE0E);
   height: 10em;
   resize: none;
+}
+
+
+/* newpost div */
+.newPost {
+
+}
+
+
+/* homepage */
+.homepageContentDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }

@@ -4,18 +4,18 @@
     <h1><%=user.username%></h1>
     <h3><%=user.location%></h3>
     <h5><%=user.about%></h5>
+    <%if((currentUser.username !== user.username) && (!following)){%>
+      <form action="/watchuser/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+        <input type="submit" value="Start Watching" class='followBtn'>
+      </form>
+      <%} else if ((currentUser.username !== user.username) && (following)){%>
+        <form action="/stopwatching/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+          <input type="submit" value="Stop Watching" class='followBtn' id='stopWatching'>
+        </form>
+      <%}%>
   </div>
   <div class="userWatchDiv">
     <%-include('./watcherdiv.ejs')%>
     <%-include('./watchingdiv.ejs')%>
-    <%if((currentUser.username !== user.username) && (!following)){%>
-      <form action="/watchuser/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST">
-        <input type="submit" value="Start Watching">
-      </form>
-      <%} else if ((currentUser.username !== user.username) && (following)){%>
-        <form action="/stopwatching/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST">
-          <input type="submit" value="Stop Watching">
-        </form>
-      <%}%>
   </div>
 </div>
