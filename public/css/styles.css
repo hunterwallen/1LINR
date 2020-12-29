@@ -139,6 +139,8 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .gatekeeperWelcome {
@@ -362,7 +364,6 @@ header {
 
 .createTextArea {
   font-family: 'Heebo', sans-serif;
-
   font-size: 1.25em;
   padding: .75em;
   margin: .5em;
