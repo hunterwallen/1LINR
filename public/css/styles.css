@@ -139,7 +139,6 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 4em;
 }
 
 .gatekeeperWelcome {
@@ -229,7 +228,12 @@ header {
 
 
 /* gatekeeper footer */
+.landingFooterPadding {
+  min-height: 10em;
+}
+
 .landingFooter {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -237,6 +241,7 @@ header {
   background-color: #7F7E80;
   border-top: 2px solid lightgrey;
   height: 10em;
+  margin-top: 3.5em;
 }
 
 .gateFooterTop, .gateFooterBtm {
@@ -266,3 +271,61 @@ header {
   height: 85%;
   border-right: .25px solid lightgrey;
 }
+
+/* landing log in page */
+.loginLandingDiv {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loginLandingDiv img {
+  height: 200px;
+  width: 200px;
+}
+
+.authenticationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F0CE0E;
+  padding: 2em;
+  border-radius: 5px;
+  filter:drop-shadow(0 0 5px #7F7E80);
+}
+
+.loginField {
+    font-size: 1.25em;
+    padding: .75em;
+    margin: .5em;
+    border-radius: 5px;
+    border: 2px solid white;
+    filter: drop-shadow(0 0 5px #F0CE0E);
+  }
+
+  .loginField:focus {
+    outline: none;
+    border: 2px solid #7F7E80;
+    filter: drop-shadow(0 0 5px #7F7E80);
+  }
+
+
+  .submitUser {
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.25em;
+    color: whitesmoke;
+    border: none;
+    background-color: #7F7E80;
+    width: 10em;
+    padding: .5em;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 5px #7F7E80);
+    margin: .5em;
+  }
+
+  .submitUser:hover {
+    cursor: pointer;
+  }
