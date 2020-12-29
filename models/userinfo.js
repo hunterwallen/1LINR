@@ -52,7 +52,8 @@ const userSchema = new Schema ({
   img:[Image.schema],
   post:[Post.schema],
   watching: {type:Array, default: []},
-  watched: {type: Array, default: []}
+  watched: {type: Array, default: []},
+  watchList: {type:Array, default: []}
 })
 
 

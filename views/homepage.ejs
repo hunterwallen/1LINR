@@ -4,8 +4,13 @@
     <%-include('./partials/header.ejs')%>
     <%-include('./partials/nav.ejs')%>
     <div class="homepageContentDiv">
-      <%-include('./partials/newpost.ejs')%>
-      <%-include('./partials/feed.ejs')%>
+      <div class="newPostHomepage">
+        <%-include('./partials/newpost.ejs')%>
+      </div>
+      <div class="feedAndWatchingDiv">
+        <%-include('./partials/homewatching.ejs')%>
+        <%-include('./partials/feed.ejs')%>
+      </div>
       <%-include('./partials/footer.ejs')%>
     </div>
   </body>

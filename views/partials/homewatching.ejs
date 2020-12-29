@@ -1,12 +1,10 @@
-<a href="/watched/<%=user._id%>">
-  <h3>Being Watched By</h3>
-</a>
-<div class="watchDiv">
-    <%if(!user.watched[0]) {%>
-      <h3><%=user.username%> is not currently being watched by anyone.</h3>
+  <div class="shortListDiv">
+    <h3>My Short List</h3>
+    <%if(!currentUser.watchList[0]) {%>
+      <h4>Add Up To 10 Users to Your Short List to See Them Here</h4>
     <%} else {
-      for(let i = 0; i <= 6; i++) {
-        let thisUser = user.watched[i]
+      for(let i = 0; i <= 10; i++) {
+        let thisUser = currentUser.watchList[i]
         if(thisUser) {%>
         <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
           <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic'">
@@ -18,4 +16,4 @@
         }%>
       <%}%>
     <%}%>
-</div>
+  </div>
