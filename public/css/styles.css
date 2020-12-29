@@ -46,6 +46,8 @@ header {
   color: #021670;
   box-sizing: border-box;
   font-size: 1.5em;
+  border-left: 2px solid #F0CE0E;
+  border-right: 2px solid #F0CE0E;
 }
 
 .homeNav:hover {
@@ -55,12 +57,13 @@ header {
 }
 
 .navDropDown {
-  width: 6em;
+  width: 5.5em;
   height: 3.7em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  border-left: 2px solid #F0CE0E;
 }
 
 .navDropDown:hover {
@@ -94,13 +97,16 @@ header {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
+  align-items: space-between;
+  align-content: center;
   width: 10em;
   box-sizing: border-box;
-  min-height: 3em;
+  min-height: 2.5em;
+  text-align: center;
 }
 
 .topNavUL li a {
-  padding: .5em;
+  padding: .75em 1em;
   width: 100%;
   font-size: 1rem;
   text-decoration: none;
@@ -119,9 +125,9 @@ header {
 
 .logout input {
   display: block;
-  padding: 1em;
+  padding: .85em;
   width: 100%;
-  text-align: left;
+  text-align: center;
   background-color: inherit;
   border: none;
   font-size: 1rem;
@@ -131,6 +137,7 @@ header {
 .logout input:hover {
   cursor: pointer;
   background-color: #FFDB0D;
+  outline: 2px solid #D1B30A;
 }
 
 
