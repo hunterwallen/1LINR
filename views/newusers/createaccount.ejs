@@ -1,19 +1,20 @@
 <html lang="en" dir="ltr">
   <%-include('../partials/head.ejs')%>
   <body>
-    <%-include('../partials/header.ejs')%>
-    <h1>Create Account</h1>
-    <form class="authenticationForm" action="/newusers/" method="POST">
-      <h3 for="username">Username:</h3>
-      <input type="text" name="username" placeholder="username..." id='username'>
-      <h3 for='password'>Password</h3>
-      <input type="password" name="password" placeholder="password..." id='password'>
-      <h3 for='location'>Location</h3>
-      <input type="text" name="location" placeholder="Location (City, ST)" id='location'>
-      <h3 for='about'>Describe Yourself</h3>
-      <textarea name="about" id='about'>Tell us about yourself in 250 characters or less...</textarea>
-      <br/><input type="submit" value="Create Account" class='submitUser'>
-    </form>
-    <%-include('../partials/gatekeeperFooter.ejs')%>
+    <div class="createAccountDiv">
+      <a href='/'><img src="https://i.imgur.com/cDB6oUi.png" alt="1LINR Logo"></a>
+      <form class="authenticationForm" action="/newusers/" method="POST">
+        <h3 for="username">Username:</h3>
+        <input type="text" name="username" placeholder="username..." id='username' class='createTextInput'>
+        <h3 for='password'>Password</h3>
+        <input type="password" name="password" placeholder="password..." id='password' class='createTextInput'>
+        <h3 for='location'>Location</h3>
+        <input type="text" name="location" placeholder="City, ST" id='location' class='createTextInput'>
+        <h3 for='about'>Describe Yourself</h3>
+        <textarea name="about" id='about' class='createTextArea' placeholder="Tell us about yourself in 250 characters or less..."></textarea>
+        <br/><input type="submit" value="Create Account" class='submitUser'>
+      </form>
+      <%-include('../partials/gatekeeperFooter.ejs')%>
+    </div>
   </body>
 </html>
