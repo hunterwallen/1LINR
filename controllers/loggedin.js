@@ -82,13 +82,27 @@ loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
     }
     return isWatching
   }
+  const checkShortList = (currentUserWatchList, viewedUser) => {
+    let viewedId = viewedUser._id
+    let shortListed = false
+    for(let i = 0; i < currentUserWatchList.length; i++) {
+      let thisShortLister = currentUserWatchList[i]._id
+      if(thisShortLister.toString() === viewedId.toString()) {
+        shortListed = true
+        break
+      }
+    }
+    return shortListed
+  }
   let userId = req.params.id
   User.findById( userId , (err, foundUser) => {
     let following = checkWatching(req.session.currentUser.watching, foundUser)
+    let shortList = checkShortList(req.session.currentUser.watchList, foundUser)
     res.render('userpage.ejs', {
       user: foundUser,
       currentUser: req.session.currentUser,
-      following: following
+      following: following,
+      shortList: shortList
     })
   })
 })
@@ -330,6 +344,47 @@ loggedIn.put('/stopwatching/:userId/:requestId', (req, res) => {
           res.redirect('/userpage/' + userToWatch._id)
         })
       })
+    })
+  })
+})
+
+loggedIn.put('/shortlist/:userId/:requestId', (req, res) => {
+  let userToWatchID = req.params.requestId
+  let requestorID = req.params.userId
+  User.findById( requestorID, (err, requestor) => {
+    User.findById( userToWatchID, (err, userToWatch) => {
+      let userToWatchSpecs = {
+        _id: userToWatch._id,
+        username: userToWatch.username,
+        location: userToWatch.location
+      }
+      requestor.watchList.push(userToWatchSpecs)
+        requestor.save((err, data) => {
+          req.session.currentUser = requestor
+          res.redirect('/userpage/' + userToWatch._id)
+        })
+    })
+  })
+})
+
+loggedIn.put('/removeshortlist/:userId/:requestId', (req, res) => {
+  let userToWatchID = req.params.requestId
+  let requestorID = req.params.userId
+  User.findById( requestorID, (err, requestor) => {
+    User.findById( userToWatchID, (err, userToWatch) => {
+      let indexOfUser = 0
+      for(i in requestor.watchList) {
+        let thisId = requestor.watchList[i]._id
+        if (thisId.toString() === (userToWatch._id).toString()) {
+          indexOfUser = i
+          break
+        }
+      }
+      requestor.watchList.splice(indexOfUser, 1)
+        requestor.save((err, data) => {
+          req.session.currentUser = requestor
+          res.redirect('/userpage/' + userToWatch._id)
+        })
     })
   })
 })

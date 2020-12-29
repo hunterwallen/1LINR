@@ -12,7 +12,15 @@
         <form action="/stopwatching/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
           <input type="submit" value="Stop Watching" class='followBtn' id='stopWatching'>
         </form>
-      <%}%>
+      <%if(!shortList) {%>
+        <form action="/shortlist/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+          <input type="submit" value="Add to Short List" class='followBtn'>
+        </form>
+      <%} else {%>
+        <form action="/removeshortlist/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+          <input type="submit" value="Remove From Short List" class='followBtn' id='stopWatching'>
+        </form>
+      <%}}%>
   </div>
   <div class="userWatchDiv">
     <%-include('./watcherdiv.ejs')%>
