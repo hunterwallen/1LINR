@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
-const multer = require('multer')
 const newusers = express.Router()
 const User = require('../models/userinfo.js')
 

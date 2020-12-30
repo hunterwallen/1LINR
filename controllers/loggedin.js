@@ -1,18 +1,21 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
+const cloudinary = require('cloudinary')
 const loggedIn = express.Router()
-const fs = require('fs')
-const path = require('path')
-const multer = require('multer')
 const User = require('../models/userinfo.js')
 const Post = require('../models/post.js')
 const Image = require('../models/img.js')
 const seed = require('../models/userseed.js')
 const postseed = require('../models/postseed.js')
 
-const storage = multer.memoryStorage()
 
-const upload = multer({storage: storage})
+cloudinary.config({
+  cloud_name: 'onelinrprofilepics',
+  api_key: process.env.CLOUDINARYAPIKEY,
+  api_secret: process.env.CLOUDINARYSECRET
+});
+
+
 
 const isAuthenticated = (req, res, next) => {
   if(req.session.currentUser) {
@@ -60,6 +63,7 @@ loggedIn.get('/createposts/seed', (req, res) => {
 
 loggedIn.get('/', isAuthenticated, (req, res) => {
   User.find({}, (err, allUsers) => {
+    console.log(req.session.currentUser);
     res.render('homepage.ejs', {
       allUsers: allUsers,
       currentUser: req.session.currentUser,
@@ -71,25 +75,29 @@ loggedIn.get('/', isAuthenticated, (req, res) => {
 
 loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
   const checkWatching = (currentUserWatching, viewedUser) => {
-    let viewedId = viewedUser._id
     let isWatching = false
-    for(let i = 0; i < currentUserWatching.length; i++) {
-      let thisWatching = currentUserWatching[i]._id
-      if(thisWatching.toString() === viewedId.toString()) {
-        isWatching = true
-        break
+    if(viewedUser && currentUserWatching[0]) {
+      let viewedId = viewedUser._id
+      for(let i = 0; i < currentUserWatching.length; i++) {
+        let thisWatching = currentUserWatching[i]._id
+        if(thisWatching.toString() === viewedId.toString()) {
+          isWatching = true
+          break
+        }
       }
     }
     return isWatching
   }
   const checkShortList = (currentUserWatchList, viewedUser) => {
-    let viewedId = viewedUser._id
     let shortListed = false
-    for(let i = 0; i < currentUserWatchList.length; i++) {
-      let thisShortLister = currentUserWatchList[i]._id
-      if(thisShortLister.toString() === viewedId.toString()) {
-        shortListed = true
-        break
+      if(currentUserWatchList[0] && viewedUser) {
+      let viewedId = viewedUser._id
+      for(let i = 0; i < currentUserWatchList.length; i++) {
+        let thisShortLister = currentUserWatchList[i]._id
+        if(thisShortLister.toString() === viewedId.toString()) {
+          shortListed = true
+          break
+        }
       }
     }
     return shortListed
@@ -154,9 +162,11 @@ loggedIn.get('/editpost/:id/:postIndex', isAuthenticated, (req, res) => {
 
 loggedIn.get('/edituser/:id', isAuthenticated, (req, res) => {
   res.render('editprofile.ejs', {
-    currentUser: req.session.currentUser
+    currentUser: req.session.currentUser,
+    imgURl: req.session.currentUser.img
   })
 })
+
 
 loggedIn.post('/newpost/:id', (req, res) => {
   let userID = req.params.id
@@ -170,28 +180,6 @@ loggedIn.post('/newpost/:id', (req, res) => {
   })
 })
 
-loggedIn.post('/addphoto/:id', upload.single('img'), (req, res) => {
-  let userId = req.params.id
-  let img = {
-    img:{
-      data: req.file.img.buffer,
-      contentType: 'image/jpeg'
-    }
-  }
-  User.findById ( userId, (err, foundUser) => {
-    Image.create(img, (err, uploadedImage) => {
-      if(err) {
-        console.log(err.message);
-      } else {
-        foundUser.img = uploadedImage
-        foundUser.save((err, data) => {
-          req.session.currentUser = foundUser
-          res.redirect('/')
-        })
-      }
-    })
-  })
-})
 
 loggedIn.put('/editpost/:id/:postindex', (req, res) => {
   let userId = req.params.id
@@ -208,27 +196,38 @@ loggedIn.put('/editpost/:id/:postindex', (req, res) => {
 
 loggedIn.put('/edituser/:id', (req, res) => {
   let userID = req.params.id
-  req.body.post = req.session.currentUser.post
+  console.log(req.body);
+  req.body.username = req.body.username + '9'
   req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-  User.create(req.body, (err, user) => {
-    if(err) {
-      console.log(err.message);
-    } else {
-      console.log(user);
-      User.findByIdAndRemove(userID, (err, data) => {
-        if(err){
-          console.log(err.message);
-        } else {
-          console.log('old data deleted');
-          user._id = userID
-          user.save((err, data) => {
-            console.log('profile updated');
-            res.redirect('/')
-          })
-        }
-      })
-    }
-  })
+    User.create(req.body, (err, newuser) => {
+      if(err){
+        console.log(err);
+      } else {
+        User.findById(userID, (err, foundUser) => {
+          if(err){
+            console.log(err.message);
+          } else {
+            console.log(foundUser);
+            foundUser.img = newuser.img
+            foundUser.username = newuser.username.slice(0, newuser.username.length - 1)
+            foundUser.password = newuser.password
+            foundUser.location = newuser.location
+            foundUser.save((err, data) => {
+                req.session.currentUser = foundUser
+                console.log(req.session.currentUser);
+                User.findByIdAndDelete( newuser._id, (err, data) => {
+                  if(err) {
+                    console.log(err);
+                  } else {
+                    console.log('duplicate deleted!');
+                    res.redirect('/')
+                  }
+                })
+            })
+          }
+        })
+      }
+    })
 })
 
 loggedIn.put('/like/:userID/:postID/:postIndex', (req, res) => {

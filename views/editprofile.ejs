@@ -3,13 +3,33 @@
   <body>
     <%-include('./partials/header.ejs')%>
     <%-include('./partials/nav.ejs')%>
-    <form action="/addphoto/<%=currentUser._id%>" method="POST" enctype="multipart/form-data">
-      <h1>Add a Profile Picture</h1>
-      <input type="file" name="img">
-      <input type="submit" value="Upload Image">
-    </form>
+    <!-- cloudinary uploader -->
+    <button id="upload_widget" class="cloudinary-button">Upload files</button>
+
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    let imgURL = '<%=currentUser.img%>'
+    var myWidget = cloudinary.createUploadWidget({
+      cloudName: 'onelinrprofilepics',
+      uploadPreset: 'rlrj84dh', public_id:'<%=currentUser._id%>'}, (error, result) => {
+        if (!error && result && result.event === "success") {
+          console.log('Done! Here is the image info: ', result);
+          document.getElementById("imgURL").setAttribute("value", result.info.url)
+        } else {
+          console.log(error);
+        }
+      }
+    )
+
+
+    document.getElementById("upload_widget").addEventListener("click", function(){
+        myWidget.open();
+      }, false);
+    </script>
     <h1>Edit Profile</h1>
     <form class="authenticationForm" action="/edituser/<%=currentUser._id%>/?_method=PUT" method="POST">
+      <input type="hidden" name="img" value="<%=currentUser.img%>" id='imgURL'>
       <h3 for="username">Username:</h3>
       <input type="text" name="username" value="<%=currentUser.username%>" id='username'>
       <h3 for='password'>Password</h3>
