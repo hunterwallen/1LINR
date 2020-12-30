@@ -77,7 +77,7 @@ header {
 
 .navImg {
   height: 3em;
-  border-radius: 3em;
+  border-radius: 2em;
   padding: .35em 0 .45em 0;
 }
 
@@ -450,13 +450,11 @@ header {
 .feedAndWatchingDiv {
   width: 100%;
   box-sizing: border-box;
-  padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-
 
 /* shorlist */
 .shortListDiv {
@@ -469,11 +467,13 @@ header {
   padding: 1em;
   filter: drop-shadow(3px 3px 5px rgb(200, 200, 200));
   color: #021670;
+  margin: .5em;
 }
 
 .shortListDiv h3 {
-  margin: .25em;
-  font-size: 2em;
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .shortListContainer {
@@ -485,6 +485,15 @@ header {
   width: 100%;
 }
 
+.shortListContainer h4 {
+  text-align: center;
+  margin: .25em;
+}
+
+.shortListDiv hr {
+  width: 90%;
+  border: .25px solid lightgrey;
+}
 .miniUserCard {
   margin: 1em;
   width: 7.5em;
@@ -518,4 +527,133 @@ header {
 
 .miniUserCard h5 {
   font-size: .75em;
+}
+
+/* homepage feed */
+.feedDiv {
+  display: flex;
+  flex-direction: column;
+  width: calc(80vw + 1em);
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1em;
+  filter: drop-shadow(3px 3px 5px rgb(200, 200, 200));
+  color: #021670;
+  margin: .5em;
+}
+
+.feedDiv h3 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.feedDiv hr {
+  width: 90%;
+  border: .25px solid lightgrey;
+}
+
+.feedPosts {
+  list-style: none;
+  width: 90%;
+  box-sizing: border-box;
+  padding: .5em;
+  margin: 0;
+}
+
+.feedPosts li {
+  padding: 2em 0;
+  border-bottom: .25px dotted lightgrey;
+}
+
+.feedPosts li h2 {
+  margin: 2em 0;
+  text-align: center;
+}
+
+.titleNameFeed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.titleNameFeed h4 {
+  margin: 0;
+}
+
+.nameDateFeed {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.nameDateFeed h5 {
+  margin: 0;
+}
+
+.nameDateFeed h5 a {
+  text-decoration: none;
+  color: grey;
+}
+
+.nameDateFeed h5 a:hover {
+  color: #3675EB;
+}
+
+.likeDislikeFeed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.likeDislikeFeed h5 {
+  color: #F0CE0E;
+  font-size: 1em;
+  margin: 0;
+}
+
+.likeDislikeDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  color: #F0CE0E;
+  font-size: 1.25em;
+  margin: 0;
+}
+
+.likeDislikeDiv form {
+  margin: 0;
+}
+
+.likeDislikeDiv form input {
+  background-color: inherit;
+  border: none;
+  color: grey;
+  font-size: 1em;
+}
+
+.likeDislikeDiv form input:hover{
+  background-color: inherit;
+  border: none;
+  color: #3675EB;
+  cursor: pointer;
+}
+
+/* larger screens feed page  */
+@media (min-width: 700px) {
+  .feedAndWatchingDiv {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: calc(80vw + 4.25em);
+  }
+  .shortListDiv {
+    width: 25%;
+  }
+  .shortListDiv h3 {
+    font-size: 1.5em;
+  }
 }
