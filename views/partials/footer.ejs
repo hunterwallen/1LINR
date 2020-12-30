@@ -1,11 +1,10 @@
-<footer>
+<div class="loggedInFooterPadding">
+
+</div>
+<footer class='loggedInFooter'>
   <ul class="footerTop">
-    <li><a href="/">Home</a></li>
-    <li><a href="/userpage/<%=currentUser._id%>"><%=currentUser.username%></a></li>
-    <li><a href="/watching/<%=currentUser._id%>">People I'm Watching</a></li>
-    <li><a href="/watched/<%=currentUser._id%>">People Watching Me</a></li>
-    <li><a href="/lookaround/">New People to Watch</a></li>
-    <li><a href="/editlist/">Edit My Posts</a></li>
+    <li><a href="/userpage/<%=currentUser._id%>">My Profile</a></li>
+    <li><a href="/lookaround/">Look Around</a></li>
     <li><a href="/edituser/<%=currentUser._id%>">Settings</a></li>
     <li>
       <form class="logoutFooter" action="/sessions/?_method=DELETE" method="POST">
@@ -13,7 +12,8 @@
       </form>
     </li>
   </ul>
-  <ul class="footerBtm">
+  <div class="verticalRule"> </div>
+  <ul class="footerBottom">
     <li><a href="https://hunterwallen.github.io/">Creator's Page</a></li>
     <li><a href="https://hunterwallen.github.io/projects.ht">Creator's Projects</a></li>
     <li><a href="https://hunterwallen.github.io/contact.html">Contact Me</a></li>
