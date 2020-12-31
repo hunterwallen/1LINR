@@ -1,20 +1,23 @@
-<div class="newPeopleDiv">
-  <% for (i in allUsers) {
-      let thisUser = allUsers[i]
-      let thisUserID = (allUsers[i]._id).toString()
-      let notWatching = true
-      for (j in currentUser.watching) {
-        let watchedUserId = currentUser.watching[j]._id
-        if(thisUserID === watchedUserId) {
-          notWatching = false
+<div class="watchingFullDiv">
+  <h1>Look Around</h1>
+  <div class='userCards' id="fullPageWatchCards">
+    <% for (i in allUsers) {
+        let thisUser = allUsers[i]
+        let thisUserID = (allUsers[i]._id).toString()
+        let notWatching = true
+        for (j in currentUser.watching) {
+          let watchedUserId = currentUser.watching[j]._id
+          if(thisUserID === watchedUserId) {
+            notWatching = false
+          }
         }
-      }
-      if(notWatching === true && currentUser._id !== thisUserID) { %>
-        <a href="/userpage/<%=thisUser._id%>">
-          <img src="" alt="<%=thisUser.username%>'s Pic'">
-          <h4><%=thisUser.username%></h4>
-          <h5><%=thisUser.location%></h5>
-        </a>
-    <%}
-  }%>
+        if(notWatching === true && currentUser._id !== thisUserID) { %>
+          <a href="/userpage/<%=thisUser._id%>" class='miniUserCard'>
+            <img src="<%=thisUser.img%>" alt="<%=thisUser.username%>'s Pic'" class='miniUserPic'>
+            <h4><%=thisUser.username%></h4>
+            <h5><%=thisUser.location%></h5>
+          </a>
+      <%}
+    }%>
+  </div>
 </div>
