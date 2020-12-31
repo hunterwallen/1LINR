@@ -4,7 +4,7 @@
     <%-include('./partials/header.ejs')%>
     <%-include('./partials/nav.ejs')%>
     <div class="watchFullPage">
-      <form class="authenticationForm editProfileForm" action="/edituser/<%=currentUser._id%>/?_method=PUT" method="POST">
+      <div class="authenticationForm">
         <h1>Edit Profile</h1>
         <!-- cloudinary uploader -->
         <h3 for='upload_widget'>Customize Profile Picture</h3>
@@ -29,17 +29,19 @@
           }, false);
         </script>
         <!-- end cloudinary uploader widget -->
-        <input type="hidden" name="img" value="<%=currentUser.img%>" id='imgURL'>
-        <h3 for="username">Username:</h3>
-        <input type="text" name="username" value="<%=currentUser.username%>" id='username' class='createTextInput'>
-        <h3 for='password'>Password</h3>
-        <input type="password" name="password" placeholder="password..." id='password' class='createTextInput'class='createTextInput'>
-        <h3 for='location'>Location</h3>
-        <input type="text" name="location" value="<%=currentUser.location%>" id='location' class='createTextInput'>
-        <h3 for='about'>Describe Yourself</h3>
-        <textarea name="about" id='about' class='createTextArea'><%=currentUser.about%></textarea>
-        <br/><input type="submit" value="Update" class='submitUser'>
-      </form>
+        <form class="editProfileForm" action="/edituser/<%=currentUser._id%>/?_method=PUT" method="POST">
+          <input type="hidden" name="img" value="<%=currentUser.img%>" id='imgURL'>
+          <h3 for="username">Username:</h3>
+          <input type="text" name="username" value="<%=currentUser.username%>" id='username' class='createTextInput'>
+          <h3 for='password'>Password</h3>
+          <input type="password" name="password" placeholder="password..." id='password' class='createTextInput'class='createTextInput'>
+          <h3 for='location'>Location</h3>
+          <input type="text" name="location" value="<%=currentUser.location%>" id='location' class='createTextInput'>
+          <h3 for='about'>Describe Yourself</h3>
+          <textarea name="about" id='about' class='createTextArea'><%=currentUser.about%></textarea>
+          <br/><input type="submit" value="Update" class='submitUser'>
+        </form>
+      </div>
     <%-include('./partials/footer.ejs')%>
     </div>
   </body>
