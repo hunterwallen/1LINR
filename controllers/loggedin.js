@@ -270,7 +270,7 @@ loggedIn.put('/userlike/:userID/:postID/:postIndex', (req, res) => {
       foundUser.post.splice(req.params.postIndex, 1, foundPost)
       foundUser.save((err, data) => {
       console.log('likeupdated', foundPost);
-      res.redirect('/userpage/' + foundUser.username)
+      res.redirect('/userpage/' + foundUser._id)
     })
     })
   })
@@ -284,7 +284,7 @@ loggedIn.put('/userdislike/:userID/:postID/:postIndex', (req, res) => {
       foundUser.post.splice(req.params.postIndex, 1, foundPost)
       foundUser.save((err, data) => {
       console.log('dislikeupdated', foundPost);
-      res.redirect('/userpage/' + foundUser.username)
+      res.redirect('/userpage/' + foundUser._id)
     })
     })
   })

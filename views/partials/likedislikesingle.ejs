@@ -1,0 +1,8 @@
+<div class="likeDislikeDiv">
+  <form action="/userlike/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/?_method=PUT" method="POST">
+    <input type="submit" value="Like">
+  </form><span> | </span>
+  <form action="/userdislike/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/?_method=PUT" method="POST">
+    <input type="submit" value="Dislike">
+  </form>
+</div>
