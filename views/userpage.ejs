@@ -3,8 +3,19 @@
   <body>
     <%-include('./partials/header.ejs')%>
     <%-include('./partials/nav.ejs')%>
-    <%-include('./partials/usercard.ejs')%>
-    <%-include('./partials/userfeed.ejs')%>
-    <%-include('./partials/footer.ejs')%>
+    <div class="profilePageContent">
+      <%-include('./partials/usercard.ejs')%>
+      <%-include('./partials/userpagenav.ejs')%>
+      <div class="userContentDiv focus" id="userDiv1">
+        <%-include('./partials/userfeed.ejs')%>
+      </div>
+      <div class="userContentDiv" id="userDiv2">
+        <%-include('./partials/watchingdiv.ejs')%>
+      </div>
+      <div class="userContentDiv" id="userDiv3">
+        <%-include('./partials/watcherdiv.ejs')%>
+      </div>
+      <%-include('./partials/footer.ejs')%>
+    </div>
   </body>
 </html>

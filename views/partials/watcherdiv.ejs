@@ -1,9 +1,7 @@
-<a href="/watched/<%=user._id%>">
-  <h3>Being Watched By</h3>
-</a>
+<h3>Being Watched By</h3>
 <div class="watchDiv">
     <%if(!user.watched[0]) {%>
-      <h3><%=user.username%> is not currently being watched by anyone.</h3>
+      <p><%=user.username%> is not currently being watched by anyone.</p>
     <%} else {
       for(let i = 0; i <= 6; i++) {
         let thisUser = user.watched[i]
@@ -13,8 +11,11 @@
           <h4><%=thisUser.username%></h4>
           <h5><%=thisUser.location%></h5>
         </a>
-        <%} else {
-          break
+        <%} else {%>
+          <a href="/watched/<%=user._id%>">
+          <p>Watched By <%=user.watched.length%></p>
+          </a>
+          <%break
         }%>
       <%}%>
     <%}%>
