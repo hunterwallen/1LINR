@@ -1,10 +1,10 @@
 <div class="feedDiv">
-  <ul>
+  <ul class='feedPosts'>
     <% if (user.post[0]){%>
       <% for(i in user.post) { %>
       <li>
         <div class="titleNameFeed">
-          <h3><%=user.post[i].title%></h3>
+          <h4><%=user.post[i].title%></h4>
           <div class="nameDateFeed">
             <h5>by <%=user.username%></h5>
             <h5>
@@ -32,7 +32,7 @@
             </h5>
           </div>
         </div>
-        <h4><%=user.post[i].body%></h4>
+        <h2><%=user.post[i].body%></h2>
         <div class="likeDislikeFeed">
           <h5><%=user.post[i].like%> Likes  |  <%=user.post[i].dislike%> Dislikes</h5>
           <%if(currentUser.username !== user.username) {%>

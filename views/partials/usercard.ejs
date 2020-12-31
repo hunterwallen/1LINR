@@ -2,26 +2,28 @@
   <img src="<%=user.img%>" alt="<%=user.username%>'s Profile Pic" class='userPagePic'>
   <div class="nameAboutDiv">
     <div class="nameLocationDiv">
-      <h1><%=user.username%></h1>
-      <h3><%=user.location%></h3>
+      <h1 id='username'><%=user.username%></h1>
+      <h3 id='userlocation'><%=user.location%></h3>
     </div>
-    <h5><%=user.about%></h5>
-    <%if((currentUser.username !== user.username) && (!following)){%>
-      <form action="/watchuser/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
-        <input type="submit" value="Start Watching" class='followBtn'>
-      </form>
-      <%} else if ((currentUser.username !== user.username) && (following)){%>
-        <form action="/stopwatching/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
-          <input type="submit" value="Stop Watching" class='followBtn' id='stopWatching'>
-        </form>
-      <%if(!shortList && currentUser.watchList.length <= 10) {%>
-        <form action="/shortlist/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
-          <input type="submit" value="Add to Short List" class='followBtn'>
-        </form>
-      <%} else if (shortList){%>
-        <form action="/removeshortlist/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
-          <input type="submit" value="Remove From Short List" class='followBtn' id='stopWatching'>
-        </form>
-      <%}}%>
+    <h5 id='userabout'><%=user.about%></h5>
   </div>
+</div>
+<div class="watchButtons">
+  <%if((currentUser.username !== user.username) && (!following)){%>
+    <form action="/watchuser/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+      <input type="submit" value="Start Watching" class='followBtn'>
+    </form>
+    <%} else if ((currentUser.username !== user.username) && (following)){%>
+      <form action="/stopwatching/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+        <input type="submit" value="Watching" class='unfollowBtn' id='stopWatching'>
+      </form>
+    <%if(!shortList && currentUser.watchList.length <= 10) {%>
+      <form action="/shortlist/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+        <input type="submit" value="Add to Short-List" class='followBtn'>
+      </form>
+    <%} else if (shortList){%>
+      <form action="/removeshortlist/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
+        <input type="submit" value="Short-Listed" class='unfollowBtn' id='stopWatching'>
+      </form>
+    <%}}%>
 </div>

@@ -757,16 +757,60 @@ margin: 0 5em;
   max-width: 12em;
 }
 
-.nameAboutDiv h1, h3, h5 {
+#username, #userlocation, #userabout{
   margin: .25rem 0;
 }
 
-.nameAboutDiv h1 {
+#username {
   color: #031770;
 }
 
-.nameAboutDiv h3, h5 {
+#userlocation, #userabout {
   color: #7F7E80;
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+.watchButtons {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: space-around;
+  justify-content: center;
+}
+.watchButtons form {
+  margin: .5em 1em;
+}
+.followBtn {
+  border: none;
+  background-color: #F0CE0E;
+  font-size: 1em;
+  border-radius: 5px;
+  padding: .5em;
+  color:#031770;
+  font-family: 'Heebo', sans-serif;
+  filter: drop-shadow(0 0 5px lightgrey);
+  width: 10em;
+}
+.followBtn:hover {
+  cursor: pointer;
+  background-color: #FFDB0F;
+}
+.unfollowBtn {
+  border: none;
+  background-color: #3675EB;
+  font-size: 1em;
+  border-radius: 5px;
+  padding: .5em 0;
+  color: whitesmoke;
+  font-family: 'Heebo', sans-serif;
+  filter: drop-shadow(0 0 5px lightgrey);
+  width: 10em;
+}
+.unfollowBtn:hover {
+  cursor: pointer;
+  background-color: #0524AB
 }
 
 #userPageNavBar {
