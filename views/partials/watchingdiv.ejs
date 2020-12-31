@@ -1,22 +1,25 @@
-<h3>Curently Watching</h3>
   <div class="watchDiv">
-    <%if(!user.watching[0]) {%>
-      <p><%=user.username%> is not currently watching anybody</p>
-    <%} else {
-      for(let i = 0; i <= 6; i++) {
-        let thisUser = user.watching[i]
-        if(thisUser) {%>
-        <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
-          <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic'">
-          <h4><%=thisUser.username%></h4>
-          <h5><%=thisUser.location%></h5>
-        </a>
-        <%} else {%>
-          <a href="/watching/<%=user._id%>">
-          <p>Watching <%=user.watching.length%></p>
+    <div class="userCards">
+      <%if(!user.watching[0]) {%>
+        <p><%=user.username%> is not currently watching anybody</p>
+      <%} else {
+        for(let i = 0; i <= 5; i++) {
+          let thisUser = user.watching[i]
+          if(thisUser) {%>
+          <a href='/userpage/<%=thisUser._id%>' class="miniUserCard <%if(user.watching.length >= 6) {%>fullList<%}%>">
+            <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic'">
+            <h4><%=thisUser.username%></h4>
+            <h5><%=thisUser.location%></h5>
           </a>
-          <%break
-        }%>
-      <%}%>
+          <%} else {
+            break
+          }
+        }
+      }%>
+    </div>
+    <%if(user.watching.length > 6) {%>
+      <a href="/watching/<%=user._id%>">
+      <p>View All</p>
+      </a>
     <%}%>
   </div>

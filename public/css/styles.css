@@ -730,6 +730,15 @@ margin: 0 5em;
   justify-content: space-between;
 }
 
+.cardAndNav {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
 .userCardDiv {
   display: flex;
   flex-direction: row;
@@ -772,7 +781,6 @@ margin: 0 5em;
 }
 
 .watchButtons {
-  background-color: white;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -823,7 +831,6 @@ margin: 0 5em;
   background-color: white;
   color: #031770;
   text-align: center;
-  margin-bottom: 2em;
   filter: drop-shadow(0 5px 2px lightgrey);
 }
 
@@ -846,11 +853,41 @@ margin: 0 5em;
 
 .userContentDiv {
   display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.userContentDiv img {
+  height: 4em;
 }
 
 .userContentDiv.focus {
   display: flex;
 }
+
+.watchDiv {
+  display: flex;
+  flex-direction: column;
+  width: calc(80vw + 1em);
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1em;
+  filter: drop-shadow(3px 3px 5px rgb(200, 200, 200));
+  color: #021670;
+  margin: .5em 0;
+}
+
+.userCards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+
 
 
 /* larger screens home page  */
@@ -873,4 +910,7 @@ margin: 0 5em;
   .shortListDiv h3 {
     font-size: 1.5em;
   }
-}
+
+  .userCards .fullList {
+    width: 25%;
+  }

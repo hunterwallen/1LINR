@@ -4,8 +4,10 @@
     <%-include('./partials/header.ejs')%>
     <%-include('./partials/nav.ejs')%>
     <div class="profilePageContent">
-      <%-include('./partials/usercard.ejs')%>
-      <%-include('./partials/userpagenav.ejs')%>
+      <div class="cardAndNav">
+        <%-include('./partials/usercard.ejs')%>
+        <%-include('./partials/userpagenav.ejs')%>
+      </div>
       <div class="userContentDiv focus" id="userDiv1">
         <%-include('./partials/userfeed.ejs')%>
       </div>
