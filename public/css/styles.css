@@ -184,6 +184,7 @@ header {
 }
 
 .logintext {
+  max-width: 75vw;
   font-size: 1.25em;
   padding: .75em;
   margin: .5em;

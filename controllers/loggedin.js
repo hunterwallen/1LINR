@@ -16,6 +16,12 @@ cloudinary.config({
 });
 
 
+const timeZoneOffset = () => {
+  let date = new Date();
+  let offSet = (date.getTimezoneOffset())/60
+  return offSet
+}
+
 
 const isAuthenticated = (req, res, next) => {
   if(req.session.currentUser) {

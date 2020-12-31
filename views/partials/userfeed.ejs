@@ -8,7 +8,10 @@
           <div class="nameDateFeed">
             <h5>by <%=user.username%></h5>
             <h5>
-              <% if(Number(user.post[i].createdAt.getMinutes()) < 10 ) {
+              <%
+                let date = new Date();
+                let offSet = (date.getTimezoneOffset())/60
+              if(Number(user.post[i].createdAt.getMinutes()) < 10 ) {
                 let minutes = ('0' + user.post[i].createdAt.getMinutes())
                 if(Number(user.post[i].createdAt.getHours()) <= 11) { %>
                   <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' AM'%>
