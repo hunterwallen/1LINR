@@ -1,8 +1,10 @@
 <div class="userCardDiv">
-  <img src="<%=user.img%>" alt="<%=user.username%>'s Profile Pic">
+  <img src="<%=user.img%>" alt="<%=user.username%>'s Profile Pic" class='userPagePic'>
   <div class="nameAboutDiv">
-    <h1><%=user.username%></h1>
-    <h3><%=user.location%></h3>
+    <div class="nameLocationDiv">
+      <h1><%=user.username%></h1>
+      <h3><%=user.location%></h3>
+    </div>
     <h5><%=user.about%></h5>
     <%if((currentUser.username !== user.username) && (!following)){%>
       <form action="/watchuser/<%=currentUser._id%>/<%=user._id%>/?_method=PUT" method="POST" class='followForm'>
