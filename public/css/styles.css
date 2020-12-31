@@ -1,6 +1,7 @@
 body {
   margin: 0;
   width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
   background-color: whitesmoke;
@@ -969,6 +970,12 @@ margin: 0 5em;
   text-decoration: none;
   text-align: center;
   display: block;
+}
+
+
+/* edit post single page */
+#editPostPage {
+  height: calc(100vh - 20em);
 }
 
 
