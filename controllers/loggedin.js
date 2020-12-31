@@ -116,9 +116,13 @@ loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
 })
 
 loggedIn.get('/editlist/', isAuthenticated, (req, res) => {
+  let currentUserId = req.session.currentUser._id
+  User.findById ( currentUserId, (err, foundUser) => {
     res.render('editpostslist.ejs', {
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      user: foundUser
     })
+  })
 })
 
 loggedIn.get('/lookaround/', isAuthenticated, (req, res) => {

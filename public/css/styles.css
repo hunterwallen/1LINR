@@ -894,7 +894,7 @@ margin: 0 5em;
 
 
 
-/* look around, watching and watchers full pages */
+/* look around, edit posts list, watching and watchers full pages */
 .watchFullPage {
   width: 100%;
   min-height: calc(100% - 20em);
@@ -919,6 +919,56 @@ margin: 0 5em;
 
 #fullPageWatchCards {
   justify-content: flex-start;
+}
+
+
+/* edit posts list page */
+.editDeleteHeader {
+  width: 90%;
+  border-bottom: 1px solid lightgrey;
+  text-align: center;
+  padding: .5em;
+}
+
+.editDeleteButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.deleteContainer {
+  width: auto;
+}
+.deleteBtn {
+  font-family: 'Heebo', sans-serif;
+  font-size: 1rem;
+  color: whitesmoke;
+  border: none;
+  background-color: #7F7E80;
+  width: 6rem;
+  padding: .5rem;
+  border-radius: 5px;
+  filter: drop-shadow(0 0 5px #7F7E80);
+  margin: .5em 1em;
+}
+.deleteBtn:hover{
+  cursor: pointer;
+}
+
+.editBtn {
+  font-family: 'Heebo', sans-serif;
+  font-size: 1rem;
+  color: whitesmoke;
+  border: none;
+  background-color: #7F7E80;
+  width: 5rem;
+  padding: .5rem;
+  border-radius: 5px;
+  filter: drop-shadow(0 0 5px #7F7E80);
+  margin: .5em 1em;
+  text-decoration: none;
+  text-align: center;
+  display: block;
 }
 
 

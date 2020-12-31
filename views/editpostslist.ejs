@@ -4,30 +4,58 @@
   <body>
     <%-include('./partials/header.ejs')%>
     <%-include('./partials/nav.ejs')%>
-    <h1>Edit Delete List Page</h1>
-    <div class="editDeleteListDiv">
-      <ul>
-        <% if (currentUser.post[0]){%>
-          <% for(i in currentUser.post) { %>
-          <li>
-            <div class="titleNameFeed">
-              <h3><%=currentUser.post[i].title%></h3>
-              <h5>by <a href="#"><%=currentUser.username%></a></h5>
-            </div>
-            <h4><%=currentUser.post[i].body%></h4>
-            <div class="likeDislikeFeed">
-              <a href="/editpost/<%=currentUser._id%>/<%=i%>">Edit Post</a>
-              <form class="deletePostBtn" action="/editpost/<%=currentUser._id%>/<%=i%>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete Post">
-              </form>
-            </div>
-          </li>
-          <%}%>
-        <%} else {%>
-          <li>When you make posts, this is where you will be able to edit or delete them!</li>
-        <%}%>
-      </ul>
+    <div class="watchFullPage">
+      <div class="feedDiv">
+        <h1 class='editDeleteHeader'>My Posts</h1>
+          <ul class="feedPosts">
+            <% if (currentUser.post[0]){%>
+              <% for(i in currentUser.post) {
+                let thisPost = currentUser.post[i] %>
+              <li>
+                <div class="titleNameFeed">
+                  <h4><%=thisPost.title%></h4>
+                  <div class="nameDateFeed">
+                    <h5>by <%=user.username%></h5>
+                    <h5>
+                      <% if(Number(user.post[i].createdAt.getMinutes()) < 10 ) {
+                        let minutes = ('0' + user.post[i].createdAt.getMinutes())
+                        if(Number(user.post[i].createdAt.getHours()) <= 11) { %>
+                          <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' AM'%>
+                          <%} else if(Number(user.post[i].createdAt.getHours()) === 12) {%>
+                            <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' PM'%>
+                          <%} else {
+                            let hours = (Number(user.post[i].createdAt.getHours()) - 12).toString() %>
+                            <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                          <%}%>
+                      <%} else {
+                        let minutes = user.post[i].createdAt.getMinutes()
+                        if(Number(user.post[i].createdAt.getHours()) <= 11) { %>
+                          <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' AM'%>
+                          <%} else if(Number(user.post[i].createdAt.getHours()) === 12) {%>
+                            <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + user.post[i].createdAt.getHours() + ':' + minutes + ' PM'%>
+                          <%} else {
+                            let hours = (Number(user.post[i].createdAt.getHours()) - 12).toString() %>
+                            <%=user.post[i].createdAt.toLocaleDateString('en-us') + ' ' + hours + ':' + minutes + ' PM'%>
+                          <%}%>
+                      <%}%>
+                    </h5>
+                  </div>
+                </div>
+                <h2><%=currentUser.post[i].body%></h2>
+                <div class="editDeleteButtons">
+                  <a href="/editpost/<%=currentUser._id%>/<%=i%>" class="editBtn">Edit</a>
+                  <form class="deleteContainer" action="/editpost/<%=currentUser._id%>/<%=i%>?_method=DELETE" method="POST">
+                    <input type="submit" value="Remove" class="deleteBtn">
+                  </form>
+                </div>
+              </li>
+              <%}%>
+            <%} else {%>
+              <li>When you make posts, this is where you will be able to edit or delete them!</li>
+            <%}%>
+          </ul>
+        </div>
+    <%-include('./partials/footer.ejs')%>
     </div>
-  <%-include('./partials/footer.ejs')%>
   </body>
 </html>
