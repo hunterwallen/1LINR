@@ -3,21 +3,25 @@
   <body>
     <%-include('./partials/header.ejs')%>
     <%-include('./partials/nav.ejs')%>
-    <h1>Watching</h1>
-    <div class="watchingFullDiv">
-      <%if(!user.watching[0]) {%>
-        <h3><%=user.username%> is not currently watching anybody</h3>
-      <%} else {
-        for(let i = 0; i < user.watching.length; i++) {
-          let thisUser = user.watching[i]%>
-          <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
-            <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic'">
-            <h4><%=thisUser.username%></h4>
-            <h5><%=thisUser.location%></h5>
-          </a>
-        <%}%>
-      <%}%>
+    <div class="watchFullPage">
+      <h1>Watching</h1>
+      <div class="watchingFullDiv">
+        <div class="userCards" id="fullPageWatchCards">
+          <%if(!user.watching[0]) {%>
+            <h3><%=user.username%> is not currently watching anybody</h3>
+          <%} else {
+            for(let i = 0; i < user.watching.length; i++) {
+              let thisUser = user.watching[i]%>
+              <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
+                <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic" class='miniUserPic'>
+                <h4><%=thisUser.username%></h4>
+                <h5><%=thisUser.location%></h5>
+              </a>
+            <%}%>
+          <%}%>
+        </div>
+      </div>
+      <%-include('./partials/footer.ejs')%>
     </div>
-    <%-include('./partials/footer.ejs')%>
   </body>
 </html>
