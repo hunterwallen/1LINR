@@ -4,6 +4,7 @@
         for (j in likedBy) {
           if(likedBy[j] === currentUser._id) {
             isLikedBy = true
+            break
           }
         }
     if(!isLikedBy) {%>
@@ -20,6 +21,7 @@
         for (x in dislikedBy) {
           if(dislikedBy[x] === currentUser._id) {
             isDislikedBy = true
+            break
           }
         }
     if(!isDislikedBy) {%>

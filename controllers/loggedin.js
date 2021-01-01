@@ -406,6 +406,12 @@ loggedIn.put('/stopwatching/:userId/:requestId', (req, res) => {
           break
         }
       }
+      for(i in requestor.watchList) {
+        let thisId = requestor.watchList[i]._id
+        if ((thisId).toString() === (userToWatch._id).toString()) {
+          requestor.watchList.splice(i, 1)
+        }
+      }
       requestor.watching.splice(indexOfUser, 1)
       userToWatch.watched.splice(indexOfRequestor, 1)
       userToWatch.save((err, data) => {
