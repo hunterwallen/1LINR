@@ -6,6 +6,9 @@
     <div class="watchFullPage">
       <div class="authenticationForm">
         <h1>Edit Profile</h1>
+        <%if(error) {%>
+          <h2 id='errMsg'><%=error%></h2>
+        <%}%>
         <!-- cloudinary uploader -->
         <h3 for='upload_widget'>Customize Profile Picture</h3>
         <button id="upload_widget" class="cloudinary-button">Upload Profile Pic</button>
@@ -41,6 +44,7 @@
           <textarea name="about" id='about' class='createTextArea'><%=currentUser.about%></textarea>
           <br/><input type="submit" value="Update" class='submitUser'>
         </form>
+        <h2 id='errMsg'></h2>
       </div>
     <%-include('./partials/footer.ejs')%>
     </div>

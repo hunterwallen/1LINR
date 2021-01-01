@@ -173,7 +173,8 @@ loggedIn.get('/editpost/:id/:postIndex', isAuthenticated, (req, res) => {
 loggedIn.get('/edituser/:id', isAuthenticated, (req, res) => {
   res.render('editprofile.ejs', {
     currentUser: req.session.currentUser,
-    imgURl: req.session.currentUser.img
+    imgURl: req.session.currentUser.img,
+    error: 0
   })
 })
 
@@ -208,10 +209,21 @@ loggedIn.put('/edituser/:id', (req, res) => {
   let userID = req.params.id
   console.log(req.body);
   req.body.username = req.body.username + '9'
-  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
     User.create(req.body, (err, newuser) => {
       if(err){
-        console.log(err);
+          let message = err.message
+          if (err.message.toString() === 'E11000 duplicate key error collection: project2.users index: username_1 dup key: { username: "test2" }') {
+            message = 'Username Already Exists. Please Choose a New One'
+          } else if (err.message.toString() === 'User validation failed: password: Your password must contain at least one of the following: ! @ # $ % ^ & *.') {
+            message = 'Your password must contain at least one of the following: ! @ # $ % ^ & *.'
+          } else if (err.message.toString() === 'User validation failed: location: Your location must be in the following format: City, ST') {
+             message = 'Your location must be in the following format: City, ST'
+          }
+          res.render('editprofile.ejs', {
+            error: message,
+            currentUser: req.session.currentUser,
+            imgURl: req.session.currentUser.img
+          })
       } else {
         User.findById(userID, (err, foundUser) => {
           if(err){
@@ -220,7 +232,7 @@ loggedIn.put('/edituser/:id', (req, res) => {
             console.log(foundUser);
             foundUser.img = newuser.img
             foundUser.username = newuser.username.slice(0, newuser.username.length - 1)
-            foundUser.password = newuser.password
+            foundUser.password = bcrypt.hashSync(newuser.password, bcrypt.genSaltSync(10))
             foundUser.location = newuser.location
             foundUser.save((err, data) => {
                 req.session.currentUser = foundUser
