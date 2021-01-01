@@ -69,7 +69,6 @@ loggedIn.get('/createposts/seed', (req, res) => {
 
 loggedIn.get('/', isAuthenticated, (req, res) => {
   User.find({}, (err, allUsers) => {
-    console.log(req.session.currentUser);
     res.render('homepage.ejs', {
       allUsers: allUsers,
       currentUser: req.session.currentUser,
@@ -257,10 +256,35 @@ loggedIn.put('/like/:userID/:postID/:postIndex', (req, res) => {
   let postID = req.params.postID
   User.findById( userID, (err, foundUser) => {
     Post.findByIdAndUpdate ( postID, {$inc: {like: 1}}, {new: true}, (err, foundPost) => {
+      if(foundPost.liked === undefined) {
+        foundPost.likedBy = [req.session.currentUser._id]
+      } else {
+        foundPost.likedBy.push(req.session.currentUser._id)
+      }
       foundUser.post.splice(req.params.postIndex, 1, foundPost)
       foundUser.save((err, data) => {
       console.log('likeupdated', foundPost);
-      res.redirect('/')
+      foundPost.save((err,data) => {
+          res.redirect('/')
+      })
+    })
+    })
+  })
+})
+
+loggedIn.put('/unlike/:userID/:postID/:postIndex', (req, res) => {
+  let userID = req.params.userID
+  let postID = req.params.postID
+  User.findById( userID, (err, foundUser) => {
+    Post.findByIdAndUpdate ( postID, {$inc: {like: 1}}, {new: true}, (err, foundPost) => {
+      let index = foundPost.likedBy.indexOf(req.session.currentUser._id)
+      foundPost.likedBy.splice(index, 1)
+      foundUser.post.splice(req.params.postIndex, 1, foundPost)
+      foundUser.save((err, data) => {
+      console.log('likeupdated', foundPost);
+      foundPost.save((err,data) => {
+          res.redirect('/')
+      })
     })
     })
   })
@@ -271,10 +295,35 @@ loggedIn.put('/dislike/:userID/:postID/:postIndex', (req, res) => {
   let postID = req.params.postID
   User.findById( userID, (err, foundUser) => {
     Post.findByIdAndUpdate ( postID, {$inc: {dislike: 1}}, {new: true}, (err, foundPost) => {
+      if(foundPost.liked === undefined) {
+        foundPost.dislikedBy = [req.session.currentUser._id]
+      } else {
+        foundPost.dislikedBy.push(req.session.currentUser._id)
+      }
       foundUser.post.splice(req.params.postIndex, 1, foundPost)
       foundUser.save((err, data) => {
       console.log('dislikeupdated', foundPost);
-      res.redirect('/')
+      foundPost.save((err, data) => {
+              res.redirect('/')
+      })
+    })
+    })
+  })
+})
+
+loggedIn.put('/undislike/:userID/:postID/:postIndex', (req, res) => {
+  let userID = req.params.userID
+  let postID = req.params.postID
+  User.findById( userID, (err, foundUser) => {
+    Post.findByIdAndUpdate ( postID, {$inc: {dislike: -1}}, {new: true}, (err, foundPost) => {
+      let index = foundPost.dislikedBy.indexOf(req.session.currentUser._id)
+      foundPost.dislikedBy.splice(index, 1)
+      foundUser.post.splice(req.params.postIndex, 1, foundPost)
+      foundUser.save((err, data) => {
+      console.log('dislikeupdated', foundPost);
+      foundPost.save((err,data) => {
+          res.redirect('/')
+      })
     })
     })
   })
