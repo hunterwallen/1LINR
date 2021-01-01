@@ -184,6 +184,7 @@ loggedIn.post('/newpost/:id', (req, res) => {
     Post.create(req.body, (err, createdPost) => {
       foundUser.post.unshift(createdPost)
       foundUser.save((err, data) => {
+        req.session.currentUser = foundUser
         res.redirect('/')
       })
     })
@@ -251,7 +252,7 @@ loggedIn.put('/edituser/:id', (req, res) => {
     })
 })
 
-loggedIn.put('/like/:userID/:postID/:postIndex', (req, res) => {
+loggedIn.put('/like/:userID/:postID/:postIndex/:origin', (req, res) => {
   let userID = req.params.userID
   let postID = req.params.postID
   User.findById( userID, (err, foundUser) => {
@@ -265,14 +266,18 @@ loggedIn.put('/like/:userID/:postID/:postIndex', (req, res) => {
       foundUser.save((err, data) => {
       console.log('likeupdated', foundPost);
       foundPost.save((err,data) => {
+        if(req.params.origin === 'home') {
           res.redirect('/')
+        } else {
+          res.redirect('/userpage/'+req.params.userID)
+        }
       })
     })
     })
   })
 })
 
-loggedIn.put('/unlike/:userID/:postID/:postIndex', (req, res) => {
+loggedIn.put('/unlike/:userID/:postID/:postIndex/:origin', (req, res) => {
   let userID = req.params.userID
   let postID = req.params.postID
   User.findById( userID, (err, foundUser) => {
@@ -283,14 +288,18 @@ loggedIn.put('/unlike/:userID/:postID/:postIndex', (req, res) => {
       foundUser.save((err, data) => {
       console.log('likeupdated', foundPost);
       foundPost.save((err,data) => {
+        if(req.params.origin === 'home') {
           res.redirect('/')
+        } else {
+          res.redirect('/userpage/'+req.params.userID)
+        }
       })
     })
     })
   })
 })
 
-loggedIn.put('/dislike/:userID/:postID/:postIndex', (req, res) => {
+loggedIn.put('/dislike/:userID/:postID/:postIndex/:origin', (req, res) => {
   let userID = req.params.userID
   let postID = req.params.postID
   User.findById( userID, (err, foundUser) => {
@@ -304,14 +313,18 @@ loggedIn.put('/dislike/:userID/:postID/:postIndex', (req, res) => {
       foundUser.save((err, data) => {
       console.log('dislikeupdated', foundPost);
       foundPost.save((err, data) => {
+        if(req.params.origin === 'home') {
               res.redirect('/')
+            } else {
+              res.redirect('/userpage/'+req.params.userID)
+            }
       })
     })
     })
   })
 })
 
-loggedIn.put('/undislike/:userID/:postID/:postIndex', (req, res) => {
+loggedIn.put('/undislike/:userID/:postID/:postIndex/:origin', (req, res) => {
   let userID = req.params.userID
   let postID = req.params.postID
   User.findById( userID, (err, foundUser) => {
@@ -322,7 +335,11 @@ loggedIn.put('/undislike/:userID/:postID/:postIndex', (req, res) => {
       foundUser.save((err, data) => {
       console.log('dislikeupdated', foundPost);
       foundPost.save((err,data) => {
+        if(req.params.origin === 'home') {
           res.redirect('/')
+        } else {
+          res.redirect('/userpage/'+req.params.userID)
+        }
       })
     })
     })

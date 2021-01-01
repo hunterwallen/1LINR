@@ -1,8 +1,36 @@
 <div class="likeDislikeDiv">
-  <form action="/userlike/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/?_method=PUT" method="POST">
-    <input type="submit" value="Like">
-  </form><span> | </span>
-  <form action="/userdislike/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/?_method=PUT" method="POST">
-    <input type="submit" value="Dislike">
-  </form>
+  <% let likedBy = user.post[i].likedBy
+      let isLikedBy = false
+      for (j in likedBy) {
+        if(likedBy[j] === currentUser._id) {
+          isLikedBy = true
+          break
+        }
+      }
+  if(!isLikedBy) {%>
+    <form action="/like/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/user/?_method=PUT" method="POST">
+      <input type="submit" value="Like">
+    </form><span> | </span>
+  <%} else {%>
+    <form action="/unlike/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/user/?_method=PUT" method="POST">
+      <input type="submit" value="Remove Like">
+    </form><span> | </span>
+  <%}
+  let dislikedBy = user.post[i].dislikedBy
+      let isDislikedBy = false
+      for (x in dislikedBy) {
+        if(dislikedBy[x] === currentUser._id) {
+          isDislikedBy = true
+          break
+        }
+      }
+  if(!isDislikedBy) {%>
+    <form action="/dislike/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/user/?_method=PUT" method="POST">
+      <input type="submit" value="Dislike">
+    </form>
+    <%} else {%>
+      <form action="/undislike/<%=user._id%>/<%=user.post[i]._id%>/<%=i%>/user/?_method=PUT" method="POST">
+        <input type="submit" value="Remove Dislike">
+      </form>
+      <%}%>
 </div>
