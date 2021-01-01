@@ -514,7 +514,7 @@ margin: 0 5em;
 }
 .miniUserCard {
   margin: 1em;
-  width: 7.5em;
+  min-width: 10em;
   height: 11em;
   display: flex;
   flex-direction: column;
@@ -545,6 +545,8 @@ margin: 0 5em;
 
 .miniUserCard h5 {
   font-size: .75em;
+  max-width: 90%;
+  flex-shrink: 1;
 }
 
 /* homepage feed */
@@ -929,7 +931,9 @@ margin: 0 5em;
 }
 
 #fullPageWatchCards {
-  justify-content: flex-start;
+  margin: 0 auto;
+  width: auto;
+  justify-content: space-between;
 }
 
 
