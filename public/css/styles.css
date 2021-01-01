@@ -316,6 +316,7 @@ header {
 }
 
 .loginField {
+    max-width: 75vw;
     font-size: 1.25em;
     padding: .75em;
     margin: .5em;
@@ -362,6 +363,7 @@ header {
 }
 
 .createTextInput {
+  max-width: 75vw;
   font-size: 1.25em;
   padding: .75em;
   margin: .5em;
@@ -377,6 +379,7 @@ header {
 }
 
 .createTextArea {
+  max-width: 75vw;
   font-family: 'Heebo', sans-serif;
   font-size: 1.25em;
   padding: .75em;
