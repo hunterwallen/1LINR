@@ -597,7 +597,20 @@ margin: 0 5em;
   border: .25px solid lightgrey;
 }
 
+.priority1 {
+  order: 1
+}
+
+.priority2{
+  order: 2
+}
+
+.priority3 {
+  order: 3
+}
 .feedPosts {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   width: 90%;
   box-sizing: border-box;

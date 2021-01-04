@@ -3,8 +3,23 @@
   <hr>
   <ul class='feedPosts'>
     <%for(i in allUsers){%>
-      <% if (allUsers[i].post[0]){%>
-      <li>
+      <% let isWatching = false
+          let isWatched = false
+      if (allUsers[i].post[0]){
+        let thisUser = allUsers[i]._id.toString()
+        for(j in currentUser.watching) {
+          let watching = currentUser.watching[j]._id.toString()
+          if(watching === thisUser) {
+            isWatching = true
+          }
+        }
+        for(x in currentUser.watched) {
+          let watched = currentUser.watched[x]._id.toString()
+          if(watched === thisUser) {
+            isWatched = true
+          }
+        }%>
+      <li class='<%if(isWatching) {%>priority1<%}else if (isWatched){%>priority2<%} else {%>priority3<%}%>'>
         <div class="titleNameFeed">
           <h4><%=allUsers[i].post[0].title%></h4>
           <div class="nameDateFeed">
