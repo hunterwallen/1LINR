@@ -37,7 +37,7 @@
         </div>
         <h2><%=user.post[i].body%></h2>
         <div class="likeDislikeFeed">
-          <h5><%=user.post[i].like%> Likes  |  <%=user.post[i].dislike%> Dislikes</h5>
+          <h5><%=user.post[i].likedBy.length%> Likes  |  <%=user.post[i].dislikedBy.length%> Dislikes</h5>
           <%if((currentUser.username !== user.username) && user) {%>
             <%-include('./likedislikesingle.ejs')%>
           <%}%>

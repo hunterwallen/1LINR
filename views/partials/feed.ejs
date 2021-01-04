@@ -36,7 +36,7 @@
         </div>
         <h2><%=allUsers[i].post[0].body%></h2>
         <div class="likeDislikeFeed">
-          <h5><%=allUsers[i].post[0].like%> Likes  |  <%=allUsers[i].post[0].dislike%> Dislikes</h5>
+          <h5><%=allUsers[i].post[0].likedBy.length%> Likes  |  <%=allUsers[i].post[0].dislikedBy.length%> Dislikes</h5>
           <% if(currentUser.username !== allUsers[i].username) {%>
             <%-include('./likedislikediv.ejs')%>
           <%}%>
