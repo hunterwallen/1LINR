@@ -36,10 +36,11 @@
           <input type="hidden" name="img" value="<%=currentUser.img%>" id='imgURL'>
           <h3 for="username">Username:</h3>
           <input type="text" name="username" value="<%=currentUser.username%>" id='username' class='createTextInput'>
-          <h5 id='usernameError'></h5>
+          <h5 class='errorMsg' id='usernameError'>Username must be between 5 and 16 characters.</h5>
           <h3 for='password'>Password</h3>
           <input type="password" name="password" placeholder="password..." id='password' class='createTextInput'class='createTextInput'>
-          <h5 id='passwordError'></h5>
+          <h5 class='errorMsg' id='passwordError1'>Your password must be between 7 and 16 characters.</h5>
+          <h5 class='errorMsg' id='passwordError2'>Your password must contain at least one of the following: ! @ # $ % ^ & *</h5>
           <h3 for='location'>Location</h3>
           <input type="text" name="location" value="<%=currentUser.location%>" id='location' class='createTextInput'>
           <h5 id='locationError'></h5>
@@ -52,4 +53,5 @@
     <%-include('./partials/footer.ejs')%>
     </div>
   </body>
+  <script src="/script/liveverification.js" charset="utf-8"></script>
 </html>
