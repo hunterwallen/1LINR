@@ -134,10 +134,47 @@ loggedIn.get('/lookaround/', isAuthenticated, (req, res) => {
   User.find({}, (err, allUsers) => {
     res.render('lookaround.ejs', {
       allUsers: allUsers,
+      currentUser: req.session.currentUser,
+      clear: false
+    })
+  })
+})
+
+loggedIn.put('/lookaround/search/', isAuthenticated, (req, res) => {
+    let searchparam = req.body.search
+    res.redirect('/lookaround/u/' + searchparam)
+})
+
+loggedIn.get('/lookaround/u/:username', isAuthenticated, (req, res) => {
+  let search = req.params.username
+  User.find({"username": {$regex: search}}, (err, allUsers) => {
+    console.log(allUsers);
+    res.render('lookaround.ejs', {
+      allUsers: allUsers,
+      currentUser: req.session.currentUser,
+      clear: true
+    })
+  })
+})
+
+loggedIn.get('/lookaround/l/:location', isAuthenticated, (req, res) => {
+  User.find({}, (err, allUsers) => {
+    res.render('lookaround.ejs', {
+      allUsers: allUsers,
       currentUser: req.session.currentUser
     })
   })
 })
+
+loggedIn.get('/lookaround/:username/:location', isAuthenticated, (req, res) => {
+  User.find({}, (err, allUsers) => {
+    res.render('lookaround.ejs', {
+      allUsers: allUsers,
+      currentUser: req.session.currentUser
+    })
+  })
+})
+
 
 loggedIn.get('/watched/:id', isAuthenticated, (req, res) => {
   let userID = req.params.id
