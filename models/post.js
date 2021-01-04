@@ -19,7 +19,7 @@ const postSchema = new Schema ({
                                       }
                                     return true
                                   }, message: 'Your post cannot include links or images.'}},
-  body:{type:String,validate: {
+  body:{type:String, required: true,validate: {
                           validator: (str) => {
                             let length = str.length
                             if(length > 50) {
