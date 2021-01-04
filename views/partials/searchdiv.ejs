@@ -1,7 +1,7 @@
 <form class="" action="/lookaround/search/?_method=PUT" method="POST">
-  <input type="text" name="search" placeholder="Search by Username">
-  <input type="submit" name="" value="Search">
+  <input type="text" name="search" placeholder="Search by Username" class='createTextInput' id='searchInput'>
+  <input type="submit" class='submitLogin' id='searchBtn' value="Search">
+  <%if(clear) {%>
+    <a href="/lookaround/" class="submitUser" id='searchBtn'>Clear Results</a>
+  <%}%>
 </form>
-<%if(clear) {%>
-  <a href="/lookaround/">Clear Results</a>
-<%}%>

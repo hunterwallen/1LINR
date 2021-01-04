@@ -25,6 +25,23 @@ h1, h2, h3, h4, h5, h6 {
   padding:.15em;
 }
 
+#searchInput {
+  filter: drop-shadow(0 0 5px #05209C);
+}
+
+#searchBtn {
+  width: 7em;
+}
+
+a#searchBtn {
+  text-align: center;
+  text-decoration: none;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  color: grey;
+
+}
+
 /* header */
 
 header {
