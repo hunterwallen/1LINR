@@ -20,6 +20,7 @@ newusers.get('/', (req, res) => {
 })
 
 newusers.post('/', (req, res) => {
+  req.body.location = req.body.city + ', ' + req.body.state
    User.create(req.body, (err, createdUser) => {
      if (err) {
        let message = err.message

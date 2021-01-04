@@ -211,6 +211,7 @@ loggedIn.put('/edituser/:id', (req, res) => {
   if(req.body.username === req.session.currentUser.username){
   req.body.username = req.body.username + '9'
   }
+  req.body.location = req.body.city + ', ' + req.body.state
     User.create(req.body, (err, newuser) => {
       if(err){
         let message = err.message
