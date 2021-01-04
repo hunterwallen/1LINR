@@ -11,7 +11,10 @@ newusers.get('/', (req, res) => {
     }
     res.render('newusers/createaccount.ejs', {
       error: 0,
-      allUsers: allUsers
+      allUsers: allUsers,
+      location: "City, ST",
+      about: "Tell us about yourself in 250 characters or less...",
+      username: "username..."
     })
   })
 })
@@ -20,15 +23,18 @@ newusers.post('/', (req, res) => {
    User.create(req.body, (err, createdUser) => {
      if (err) {
        let message = err.message
-       if (err.message.toString() === 'E11000 duplicate key error collection: project2.users index: username_1 dup key: { username: "test2" }') {
+       if (err.message.toString().includes('username')) {
          message = 'Username Already Exists. Please Choose a New One'
-       } else if (err.message.toString() === 'User validation failed: password: Your password must contain at least one of the following: ! @ # $ % ^ & *.') {
-         message = 'Your password must contain at least one of the following: ! @ # $ % ^ & *.'
-       } else if (err.message.toString() === 'User validation failed: location: Your location must be in the following format: City, ST') {
+       } else if (err.message.toString().includes('password')) {
+         message = 'Your password is required and must contain at least one of the following: ! @ # $ % ^ & *.'
+       } else if (err.message.toString().include('location')) {
           message = 'Your location must be in the following format: City, ST'
        }
        res.render('newusers/createaccount.ejs', {
-         error: message
+         error: message,
+         location: req.body.location,
+         about: req.body.about,
+         username: req.body.username
        })
      } else {
        createdUser.password = (bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)))

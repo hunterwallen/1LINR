@@ -208,40 +208,44 @@ loggedIn.put('/editpost/:id/:postindex', (req, res) => {
 loggedIn.put('/edituser/:id', (req, res) => {
   let userID = req.params.id
   console.log(req.body);
+  if(req.body.username === req.session.currentUser.username){
   req.body.username = req.body.username + '9'
+  }
     User.create(req.body, (err, newuser) => {
       if(err){
-          let message = err.message
-          if (err.message.toString() === 'E11000 duplicate key error collection: project2.users index: username_1 dup key: { username: "test2" }') {
-            message = 'Username Already Exists. Please Choose a New One'
-          } else if (err.message.toString() === 'User validation failed: password: Your password must contain at least one of the following: ! @ # $ % ^ & *.') {
-            message = 'Your password must contain at least one of the following: ! @ # $ % ^ & *.'
-          } else if (err.message.toString() === 'User validation failed: location: Your location must be in the following format: City, ST') {
-             message = 'Your location must be in the following format: City, ST'
-          }
-          res.render('editprofile.ejs', {
-            error: message,
-            currentUser: req.session.currentUser,
-            imgURl: req.session.currentUser.img
+        let message = err.message
+        if (err.message.toString().includes('between')) {
+            message = 'Your username must be between 5 and 16 characters long'
+        } else if (err.message.toString().includes('username')) {
+          message = 'Username Already Exists. Please Choose a New One'
+        } else if (err.message.toString().includes('password')) {
+          message = 'Your password is required and must contain at least one of the following: ! @ # $ % ^ & *.'
+        } else if (err.message.toString().include('location')) {
+           message = 'Your location must be in the following format: City, ST'
+        }
+        res.render('newusers/createaccount.ejs', {
+          error: message,
+          location: req.body.location,
+          about: req.body.about,
+          username: req.body.username,
+          currentUser: req.session.currentUser,
+          imgURl: req.session.currentUser.img
           })
       } else {
         User.findById(userID, (err, foundUser) => {
           if(err){
-            console.log(err.message);
+            console.log(err);
           } else {
-            console.log(foundUser);
             foundUser.img = newuser.img
             foundUser.username = newuser.username.slice(0, newuser.username.length - 1)
             foundUser.password = bcrypt.hashSync(newuser.password, bcrypt.genSaltSync(10))
             foundUser.location = newuser.location
             foundUser.save((err, data) => {
                 req.session.currentUser = foundUser
-                console.log(req.session.currentUser);
                 User.findByIdAndDelete( newuser._id, (err, data) => {
                   if(err) {
                     console.log(err);
                   } else {
-                    console.log('duplicate deleted!');
                     res.redirect('/')
                   }
                 })

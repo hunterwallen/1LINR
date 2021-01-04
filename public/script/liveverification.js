@@ -6,9 +6,7 @@ const liveUsernameVer = () => {
     // let thisUsername = allUsers[i].username
     if(usernameField > 0 && (usernameField < 5 || usernameField > 16)) {
       usernameError.style.display = 'flex'
-      console.log(usernameField);
     } else if(usernameField === 5 || usernameField === 16 ) {
-      console.log('working');
       usernameError.style.display = 'none'
     }
 
