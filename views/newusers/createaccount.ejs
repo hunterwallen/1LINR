@@ -7,12 +7,16 @@
         <%if(error) {%>
           <h2 id='errMsg'><%=error%></h2>
         <%}%>
-        <h3 for="username">Username:</h3>
+        <h3 for="username">Username</h3>
         <input type="text" name="username" placeholder="username..." id='username' class='createTextInput'>
+        <h5 class='errorMsg' id='usernameError'>Username must be between 5 and 16 characters.</h5>
         <h3 for='password'>Password</h3>
         <input type="password" name="password" placeholder="password..." id='password' class='createTextInput'>
+        <h5 class='errorMsg' id='passwordError1'>Your password must be between 7 and 16 characters.</h5>
+        <h5 class='errorMsg' id='passwordError2'>Your password must contain at least one of the following: ! @ # $ % ^ & *</h5>
         <h3 for='location'>Location</h3>
         <input type="text" name="location" placeholder="City, ST" id='location' class='createTextInput'>
+        <h5 class='errorMsg' id='locationError'></h5>
         <h3 for='about'>Describe Yourself</h3>
         <textarea name="about" id='about' class='createTextArea' placeholder="Tell us about yourself in 250 characters or less..."></textarea>
         <br/><input type="submit" value="Create Account" class='submitUser'>
@@ -20,4 +24,5 @@
       <%-include('../partials/gatekeeperFooter.ejs')%>
     </div>
   </body>
+  <script src="/script/liveverification.js" charset="utf-8"> let allUsers = <%=allUsers%></script>
 </html>

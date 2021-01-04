@@ -36,10 +36,13 @@
           <input type="hidden" name="img" value="<%=currentUser.img%>" id='imgURL'>
           <h3 for="username">Username:</h3>
           <input type="text" name="username" value="<%=currentUser.username%>" id='username' class='createTextInput'>
+          <h5 id='usernameError'></h5>
           <h3 for='password'>Password</h3>
           <input type="password" name="password" placeholder="password..." id='password' class='createTextInput'class='createTextInput'>
+          <h5 id='passwordError'></h5>
           <h3 for='location'>Location</h3>
           <input type="text" name="location" value="<%=currentUser.location%>" id='location' class='createTextInput'>
+          <h5 id='locationError'></h5>
           <h3 for='about'>Describe Yourself</h3>
           <textarea name="about" id='about' class='createTextArea'><%=currentUser.about%></textarea>
           <br/><input type="submit" value="Update" class='submitUser'>

@@ -5,8 +5,14 @@ const User = require('../models/userinfo.js')
 
 
 newusers.get('/', (req, res) => {
-  res.render('newusers/createaccount.ejs', {
-    error: 0
+  User.find({}, (err, allUsers) => {
+    if(err) {
+      console.log(err);
+    }
+    res.render('newusers/createaccount.ejs', {
+      error: 0,
+      allUsers: allUsers
+    })
   })
 })
 

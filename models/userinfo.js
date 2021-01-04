@@ -5,7 +5,14 @@ const Post = require('./post.js')
 
 
 const userSchema = new Schema ({
-  username:{type:String, unique: true, required: true},
+  username:{type:String, unique: true, required: true, validate: {
+                          validator: (str) => {
+                            let length = str.length
+                            if(length < 5 || length > 16) {
+                              return false
+                            } else {
+                              return true
+                            }}, message: 'Your username must be between 5 and 16 characters long.'}},
   password:{type:String, required:true, validate: {
                           validator: (str) => {
                             let length = str.length
