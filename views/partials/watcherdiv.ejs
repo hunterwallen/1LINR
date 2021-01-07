@@ -5,9 +5,10 @@
     <%} else {
       for(let i = 0; i <= 6; i++) {
         let thisUser = user.watched[i]
-        if(thisUser) {%>
+        if(thisUser) {
+          let thisImg = allUsers.find((users) => users.username === thisUser.username).img%>
         <a href='/userpage/<%=thisUser._id%>' class="miniUserCard <%if(user.watched.length >= 6) {%>fullList<%}%>">
-          <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic'">
+          <img src="<%=thisImg%>" alt="<%=thisUser.username%>'s Pic'">
           <h4><%=thisUser.username%></h4>
           <h5><%=thisUser.location%></h5>
         </a>

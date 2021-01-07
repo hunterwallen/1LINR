@@ -11,9 +11,10 @@
             <h3><%=user.username%> is not currently being watched by anyone.</h3>
           <%} else {
             for(let i = 0; i < user.watched.length; i++) {
-              let thisUser = user.watched[i]%>
+              let thisUser = user.watched[i]
+              let thisImg = allUsers.find((users) => users.username === thisUser.username).img%>%>
               <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
-                <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic'" class='miniUserPic'>
+                <img src="<%=thisImg%>" alt="<%=thisUser.username%>'s Pic'" class='miniUserPic'>
                 <h4><%=thisUser.username%></h4>
                 <h5><%=thisUser.location%></h5>
               </a>

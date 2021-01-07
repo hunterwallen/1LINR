@@ -9,7 +9,7 @@
           let thisUser = currentUser.watchList[i]
           if(thisUser) {%>
           <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
-            <img src="https://i.imgur.com/GM7Y8x0m.png" alt="<%=thisUser.username%>'s Pic'" class='miniUserPic'>
+            <img src="<%=thisUser.img%>" alt="<%=thisUser.username%>'s Pic'" class='miniUserPic'>
             <h4><%=thisUser.username%></h4>
             <h5><%=thisUser.location%></h5>
           </a>

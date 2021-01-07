@@ -109,13 +109,16 @@ loggedIn.get('/userpage/:id', isAuthenticated, (req, res) => {
   }
   let userId = req.params.id
   User.findById( userId , (err, foundUser) => {
-    let following = checkWatching(req.session.currentUser.watching, foundUser)
-    let shortList = checkShortList(req.session.currentUser.watchList, foundUser)
-    res.render('userpage.ejs', {
-      user: foundUser,
-      currentUser: req.session.currentUser,
-      following: following,
-      shortList: shortList
+    User.find({}, (err, allUsers) => {
+      let following = checkWatching(req.session.currentUser.watching, foundUser)
+      let shortList = checkShortList(req.session.currentUser.watchList, foundUser)
+      res.render('userpage.ejs', {
+        user: foundUser,
+        currentUser: req.session.currentUser,
+        following: following,
+        shortList: shortList,
+        allUsers: allUsers
+      })
     })
   })
 })
@@ -160,19 +163,25 @@ loggedIn.get('/lookaround/u/:username', isAuthenticated, (req, res) => {
 
 loggedIn.get('/watched/:id', isAuthenticated, (req, res) => {
   let userID = req.params.id
-  User.findById( userID, (err, foundUser) => {
-    res.render('watchers.ejs', {
-      currentUser: req.session.currentUser,
-      user: foundUser
+  User.find({}, (err, allUsers) => {
+    User.findById( userID, (err, foundUser) => {
+      res.render('watchers.ejs', {
+        currentUser: req.session.currentUser,
+        user: foundUser,
+        allUsers: allUsers
+      })
     })
   })
 })
 
 loggedIn.get('/watching/:id', isAuthenticated, (req, res) => {
-  User.findById( req.params.id, (err, foundUser) => {
-    res.render('watching.ejs', {
-      currentUser: req.session.currentUser,
-      user: foundUser
+  User.find({}, (err, allUsers) => {
+    User.findById( req.params.id, (err, foundUser) => {
+      res.render('watching.ejs', {
+        currentUser: req.session.currentUser,
+        user: foundUser,
+        allUsers: allUsers
+      })
     })
   })
 })
@@ -379,12 +388,14 @@ loggedIn.put('/watchuser/:userId/:requestId', (req, res) => {
       let requestorSpecs = {
         _id: requestor._id,
         username: requestor.username,
-        location: requestor.location
+        location: requestor.location,
+        img: requestor.img
       }
       let userToWatchSpecs = {
         _id: userToWatch._id,
         username: userToWatch.username,
-        location: userToWatch.location
+        location: userToWatch.location,
+        img: userToWatch.img
       }
       userToWatch.watched.push(requestorSpecs)
       requestor.watching.push(userToWatchSpecs)
@@ -446,7 +457,8 @@ loggedIn.put('/shortlist/:userId/:requestId', (req, res) => {
       let userToWatchSpecs = {
         _id: userToWatch._id,
         username: userToWatch.username,
-        location: userToWatch.location
+        location: userToWatch.location,
+        img: userToWatch.img
       }
       requestor.watchList.push(userToWatchSpecs)
         requestor.save((err, data) => {
