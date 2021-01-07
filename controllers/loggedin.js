@@ -4,7 +4,6 @@ const cloudinary = require('cloudinary')
 const loggedIn = express.Router()
 const User = require('../models/userinfo.js')
 const Post = require('../models/post.js')
-const Image = require('../models/img.js')
 const seed = require('../models/userseed.js')
 const postseed = require('../models/postseed.js')
 
