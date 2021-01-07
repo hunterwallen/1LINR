@@ -7,9 +7,10 @@
       <%} else {
         for(let i = 0; i <= 10; i++) {
           let thisUser = currentUser.watchList[i]
-          if(thisUser) {%>
+          if(thisUser) {
+            let thisImg = allUsers.find((users) => users.username === thisUser.username).img%>
           <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
-            <img src="<%=thisUser.img%>" alt="<%=thisUser.username%>'s Pic'" class='miniUserPic'>
+            <img src="<%=thisImg%>" alt="<%=thisUser.username%>'s Pic'" class='miniUserPic'>
             <h4><%=thisUser.username%></h4>
             <h5><%=thisUser.location%></h5>
           </a>

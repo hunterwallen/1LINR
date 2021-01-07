@@ -257,8 +257,7 @@ loggedIn.put('/edituser/:id', (req, res) => {
           location: req.body.location,
           about: req.body.about,
           username: req.body.username,
-          currentUser: req.session.currentUser,
-          imgURl: req.session.currentUser.img
+          currentUser: req.session.currentUser
           })
       } else {
         User.findById(userID, (err, foundUser) => {
@@ -388,14 +387,12 @@ loggedIn.put('/watchuser/:userId/:requestId', (req, res) => {
       let requestorSpecs = {
         _id: requestor._id,
         username: requestor.username,
-        location: requestor.location,
-        img: requestor.img
+        location: requestor.location
       }
       let userToWatchSpecs = {
         _id: userToWatch._id,
         username: userToWatch.username,
-        location: userToWatch.location,
-        img: userToWatch.img
+        location: userToWatch.location
       }
       userToWatch.watched.push(requestorSpecs)
       requestor.watching.push(userToWatchSpecs)
@@ -457,8 +454,7 @@ loggedIn.put('/shortlist/:userId/:requestId', (req, res) => {
       let userToWatchSpecs = {
         _id: userToWatch._id,
         username: userToWatch.username,
-        location: userToWatch.location,
-        img: userToWatch.img
+        location: userToWatch.location
       }
       requestor.watchList.push(userToWatchSpecs)
         requestor.save((err, data) => {

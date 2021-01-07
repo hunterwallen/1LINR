@@ -6,7 +6,7 @@
         for(let i = 0; i <= 5; i++) {
           let thisUser = user.watching[i]
           if(thisUser) {
-            let thisImg = allUsers.find((users) => users.username === thisUser.username).img%>
+            let thisImg = allUsers.find(users => users.id == thisUser._id).img%>
           <a href='/userpage/<%=thisUser._id%>' class="miniUserCard <%if(user.watching.length >= 6) {%>fullList<%}%>">
             <img src="<%=thisImg%>" alt="<%=thisUser.username%>'s Pic'">
             <h4><%=thisUser.username%></h4>

@@ -12,7 +12,7 @@
           <%} else {
             for(let i = 0; i < user.watching.length; i++) {
               let thisUser = user.watching[i]
-              let thisImg = allUsers.find((users) => users.username === thisUser.username).img%>
+              let thisImg = allUsers.find(users => users.id == thisUser._id).img%>
               <a href='/userpage/<%=thisUser._id%>' class="miniUserCard">
                 <img src="<%=thisImg%>" alt="<%=thisUser.username%>'s Pic" class='miniUserPic'>
                 <h4><%=thisUser.username%></h4>
