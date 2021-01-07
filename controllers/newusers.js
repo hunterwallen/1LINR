@@ -28,9 +28,7 @@ newusers.post('/', (req, res) => {
          message = 'Username Already Exists. Please Choose a New One'
        } else if (err.message.toString().includes('password')) {
          message = 'Your password is required and must contain at least one of the following: ! @ # $ % ^ & *.'
-       } else if (err.message.toString().include('location')) {
-          message = 'Your location must be in the following format: City, ST'
-       }
+       } 
        res.render('newusers/createaccount.ejs', {
          error: message,
          location: req.body.location,
